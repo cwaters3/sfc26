@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0F2230">
+<title>The Stern Fall Classic · Montauk Downs · Oct 24, 2026</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9B%B3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,600;9..40,700;9..40,800&amp;display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0F2230;--mut:#5B6B76;--line:#E1E8EC;--bg:#F4F7F8;--teal:#0A7C86;--tealbg:#E3F3F4;--lime:#A9D63B;--limetxt:#4A7A0E;--limebg:#F0F7DC;--rust:#B8470A;--rustbg:#FFF1E6;--halved:#D5DEE3}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#DCE4E8;font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);font-feature-settings:"tnum"}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+#app{max-width:430px;margin:0 auto;min-height:100vh;background:var(--bg);padding-top:env(safe-area-inset-top);padding-bottom:calc(88px + env(safe-area-inset-bottom))}
+h1{margin:6px 0 0;font-size:28px;line-height:1.1;font-weight:800;letter-spacing:-.02em}
+h2{margin:0 0 12px;font-size:18px;font-weight:800;letter-spacing:-.01em}
+.pad{padding:0 16px}
+.top{padding-top:24px}
+.stack{display:flex;flex-direction:column;gap:16px;padding:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px}
+.p16{padding:16px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--rust);text-transform:uppercase}
+.lab{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
+.sub{margin-top:8px;font-size:15px;line-height:1.4;color:var(--mut)}
+.hero{display:block;width:100%;height:auto;aspect-ratio:480/250;object-fit:cover}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600}
+.tag{display:inline-block;margin-top:12px;background:var(--rustbg);color:#8A3606;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700}
+.note{background:var(--rustbg);color:#8A3606;border-radius:12px;padding:12px;font-size:14px;font-weight:600;line-height:1.4}
+.warn{margin:12px 16px 0;background:#FDECEC;color:#8A1F1F;border-radius:12px;padding:10px 12px;font-size:13px;font-weight:600;line-height:1.4}
+.foot{font-size:12px;color:var(--mut);line-height:1.4;padding:0 4px;margin:0}
+.row{display:flex;align-items:center}
+.between{justify-content:space-between}
+.wx{display:flex;align-items:center;gap:16px}
+.bignum{font-size:56px;line-height:1;font-weight:800;letter-spacing:-.03em}
+.stat{font-size:22px;font-weight:700}
+.statlab{font-size:11px;color:var(--mut);font-weight:600}
+.tipbox{margin-top:14px;background:var(--tealbg);border-radius:12px;padding:12px;font-size:13px;line-height:1.4}
+.strip{display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.port{border-radius:999px;object-fit:cover;flex:none}
+.duo{display:flex;gap:8px}
+.side{flex:1;border-radius:12px;padding:10px;font-size:14px;font-weight:700}
+.side small{display:block;font-size:11px;font-weight:700;margin-bottom:2px;text-transform:uppercase}
+.side.d{background:var(--tealbg)}.side.d small{color:var(--teal)}
+.side.l{background:var(--limebg)}.side.l small{color:var(--limetxt)}
+.btnlink{display:flex;align-items:center;justify-content:space-between;min-height:48px;margin-top:14px;padding:0 14px;border-radius:12px;border:1px solid var(--teal);font-size:14px;font-weight:700;color:var(--teal)}
+.lnk{color:var(--teal);font-weight:700}
+.steps{display:flex;flex-direction:column;gap:14px}
+.step{display:flex;gap:12px}
+.badge{width:28px;height:28px;flex:none;border-radius:999px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.badge.rust{background:var(--rust)}
+.step b{display:block;font-size:15px}
+.step span{display:block;font-size:14px;color:var(--mut);line-height:1.4}
+.roster{overflow:hidden}
+.rhead{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.rhead.d{background:var(--tealbg)}.rhead.l{background:var(--limebg)}
+.prow{display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;border-top:1px solid var(--line);font-size:15px;font-weight:600}
+.prow em{font-style:normal;font-size:13px;font-weight:700;color:var(--mut)}
+.back{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 8px;font-size:14px;font-weight:700;color:var(--teal)}
+.scorecard{padding:20px 16px}
+.scorecols{display:flex;align-items:center;justify-content:space-between}
+.scorecol{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.scorenum{font-size:56px;line-height:1;font-weight:800;letter-spacing:-.03em}
+.dark{background:var(--ink);color:#fff;border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:center;font-size:14px;line-height:1.4}
+.win{background:var(--ink);color:#fff;border-radius:12px;padding:12px;margin-top:14px;font-size:15px;font-weight:700;text-align:center}
+.legend{display:flex;flex-wrap:wrap;gap:12px;padding:0 4px;font-size:12px;font-weight:600;color:#34444F}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:4px;display:inline-block}
+.rowhd{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:16px 0 8px}
+.st{font-size:13px;font-weight:700;text-align:right}
+.st.dt{color:var(--teal)}.st.lt{color:var(--limetxt)}.st.ht{color:#34444F}.st.mt{color:var(--mut)}
+.g9{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:4px}
+.cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:46px;border-radius:8px;font-weight:700}
+.cell .n{font-size:11px;font-weight:600}
+.cell .t{font-size:15px}
+.cell.d{background:var(--teal);color:#fff}
+.cell.l{background:var(--lime);color:var(--ink)}
+.cell.h{background:var(--halved);color:var(--ink)}
+.cell.e{background:#fff;border:1px solid var(--halved);color:var(--mut)}
+.cell.sel{box-shadow:0 0 0 3px var(--ink)}
+.mhead{display:flex;justify-content:space-between;align-items:center}
+.mhead a{display:flex;align-items:center;min-height:44px;margin:-12px 0;font-size:13px;font-weight:700;color:var(--teal)}
+.sg{display:grid;grid-template-columns:64px repeat(9,minmax(0,1fr));gap:3px}
+.g{display:flex;align-items:center;justify-content:center;height:32px;font-size:12px;font-weight:700}
+.g.hd{height:24px;font-size:11px;color:var(--mut)}
+.g.si{height:22px;font-size:11px;font-weight:600;color:var(--mut);border-bottom:1px solid var(--line)}
+.g.nm{justify-content:flex-start;font-size:13px}
+.g.nd{color:var(--teal)}.g.nl{color:var(--limetxt)}
+.g.z{background:var(--bg);border-radius:6px}
+.g.sd{background:var(--teal);color:#fff;border-radius:6px;font-size:10px}
+.g.sl{background:var(--lime);color:var(--ink);border-radius:6px;font-size:10px}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.opt{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:80px;padding:0 16px;border-radius:16px;text-align:left;border:1px solid #C5D1D8;background:#fff;color:var(--ink)}
+.opt b{display:block;font-size:20px;font-weight:800}
+.opt span.s{display:block;font-size:13px;font-weight:600;margin-top:2px;color:var(--mut)}
+.opt.d{background:var(--tealbg);border-color:#B7DDE0}.opt.d b{color:var(--teal)}
+.opt.l{background:var(--limebg);border-color:#CFE3A0}.opt.l b{color:var(--limetxt)}
+.opt.sel{border:3px solid var(--ink)}
+.opt.sel.d{background:var(--teal);color:#fff}.opt.sel.d b,.opt.sel.d span.s{color:#fff}
+.opt.sel.l{background:var(--lime)}.opt.sel.l b,.opt.sel.l span.s{color:var(--ink)}
+.opt.sel.h{background:var(--halved)}
+.radio{width:28px;height:28px;flex:none;border-radius:999px;border:2px solid #C5D1D8;background:#fff;display:flex;align-items:center;justify-content:center}
+.opt.sel .radio{border-color:#fff}
+.tally{margin-top:20px;background:#fff;border:1px solid var(--halved);border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.tally .r{font-size:13px;font-weight:700;color:var(--teal);text-align:right}
+.save{margin-top:16px;width:100%;height:52px;border-radius:14px;border:0;background:var(--ink);color:#fff;font-size:16px;font-weight:700}
+.save:disabled{background:#9AA8B1;cursor:not-allowed}
+.undo{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:13px;color:var(--mut);font-weight:600}
+.undo button{min-height:44px;padding:0 4px;border:0;background:none;font-size:13px;font-weight:700;color:var(--teal)}
+.docbar{display:flex;align-items:center;gap:8px;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:12px;font-weight:600;color:var(--mut)}
+.docframe{overflow:hidden}
+.docframe iframe{display:block;width:100%;height:70vh;border:0;background:#fff}
+.bar{height:10px;border-radius:5px;background:var(--line)}
+.prop{padding:16px}
+.prop .ttl{font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+.prop .psub{font-size:13px;font-weight:600;color:var(--mut);margin-top:2px}
+.odds{flex:none;background:var(--ink);color:#fff;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:800}
+.px{flex:1;height:48px;border-radius:12px;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--ink)}
+.px.yes{background:var(--ink);color:#fff}
+.px.no{background:#fff;color:var(--ink)}
+.settle{min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--halved);background:#fff;font-size:13px;font-weight:700;color:var(--ink)}
+.result{display:inline-block;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:var(--teal);color:#fff}
+.result.no{background:var(--halved);color:var(--ink)}
+.more{border:2px dashed #C5D1D8;border-radius:16px;padding:22px 16px;text-align:center;font-size:14px;font-weight:700;color:var(--mut)}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;height:calc(72px + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:#fff;border-top:1px solid var(--line);display:flex;z-index:10}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--mut);font-size:11px;font-weight:700}
+.tab.on{color:var(--teal);box-shadow:inset 0 3px 0 var(--teal)}
+#toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90%;text-align:center}
+#toast.on{opacity:1}
+@media (prefers-reduced-motion:reduce){#toast{transition:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <main id="view"><noscript><div class="stack"><div class="card p16">This page needs JavaScript to show the live scoreboard.</div></div></noscript></main>
+  <nav id="nav" aria-label="Main"></nav>
+  <div id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script type="module">
+// ============================================================================
+// SETTINGS: everything you will want to edit lives in this block.
+// ============================================================================
+const CONFIG = {
+  eventDate: '2026-10-24',
+  teeOff: '2026-10-24T10:15:00-04:00',
+  coords: { lat: 41.0493, lon: -71.9385 },     // Montauk Downs
+  pairingsFinal: false,                         // set to true after the Friday Evening Selection Process
+  rankingsDocUrl: ''                            // paste the "Publish to web" link for Hart's Google Doc
+};
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB77423RlsebMA1qs5zw1__W2aKkPBNhC0",
+  authDomain: "sfc26-8fa48.firebaseapp.com",
+  projectId: "sfc26-8fa48",
+  storageBucket: "sfc26-8fa48.firebasestorage.app",
+  messagingSenderId: "616542241175",
+  appId: "1:616542241175:web:c901720e91236fd28904d2"
+};
+const FB_APP_URL = "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+const FB_STORE_URL = "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+// Stroke index (hole handicap) for holes 1-18, white tees. 1 = hardest.
+const STROKE_INDEX = [11, 17, 9, 5, 3, 13, 7, 15, 1, 2, 18, 14, 8, 16, 6, 10, 12, 4];
+
+// team: 'D' = Dolphins, 'L' = Long-Teens. hcp is used as-is (max = 36).
+const PLAYERS = {
+  john:     { name: 'John Malfetano',    first: 'John',    label: 'John M.',    team: 'D', hcp: 11 },
+  david:    { name: 'David Malfetano',   first: 'David',   label: 'David M.',   team: 'D', hcp: 15 },
+  charlie:  { name: 'Charlie Waters',    first: 'Charlie', label: 'Charlie W.', team: 'D', hcp: 20 },
+  ryan:     { name: 'Ryan Pennock',      first: 'Ryan',    label: 'Ryan P.',    team: 'D', hcp: 36, max: true },
+  bryan:    { name: 'Bryan Gerla',       first: 'Bryan',   label: 'Bryan G.',   team: 'D', hcp: 20 },
+  mahaesh:  { name: 'Mahaesh Jayaraman', first: 'Mahaesh', label: 'Mahaesh J.', team: 'D', hcp: 36, max: true },
+  hart:     { name: 'Hart Zeitler',      first: 'Hart',    label: 'Hart Z.',    team: 'L', hcp: 21 },
+  alastair: { name: 'Alastair Butler',   first: 'Alastair',label: 'Alastair B.',team: 'L', hcp: 25 },
+  paul:     { name: 'Paul Bentley',      first: 'Paul',    label: 'Paul B.',    team: 'L', hcp: 30 },
+  ashwin:   { name: 'Ashwin Advani',     first: 'Ashwin',  label: 'Ashwin A.',  team: 'L', hcp: 36, max: true },
+  henry:    { name: 'Henry Marsh',       first: 'Henry',   label: 'Henry M.',   team: 'L', hcp: 28 },
+  josh:     { name: 'Josh Horen',        first: 'Josh',    label: 'Josh H.',    team: 'L', hcp: 36, max: true }
+};
+const ROSTER = {
+  D: ['john', 'david', 'charlie', 'ryan', 'bryan', 'mahaesh'],
+  L: ['hart', 'alastair', 'paul', 'ashwin', 'henry', 'josh']
+};
+
+// PLACEHOLDER pairings until Friday. Edit the ids below, then set pairingsFinal to true.
+const MATCHES = [
+  { id: 'm1', time: '10:15 AM', dolphins: ['john', 'bryan'],    longteens: ['hart', 'alastair'] },
+  { id: 'm2', time: '10:24 AM', dolphins: ['charlie', 'ryan'],  longteens: ['paul', 'henry'] },
+  { id: 'm3', time: '10:33 AM', dolphins: ['david', 'mahaesh'], longteens: ['ashwin', 'josh'] }
+];
+
+// Kalshi Korner props. Prices are the odds converted to cents.
+const PROPS = [
+  { id: 'allie',        title: 'Allie goes into labor', badge: '20:1', yes: 5,  no: 95, pct: 5 },
+  { id: 'paul-zip',     title: 'Paul naked zip lines',  badge: '5:1',  yes: 17, no: 83, pct: 17 },
+  { id: 'hart-sfc',     title: 'Hart SFC proposal',     badge: '10:1', yes: 9,  no: 91, pct: 9 },
+  { id: 'charlie-puke', title: 'Anytime Charlie puke',  badge: '2:1',  yes: 33, no: 67, pct: 33 },
+  { id: 'ashwin-balls', title: "Ashwin's lost balls", sub: 'Over/under 20 across 18 holes', badge: 'O/U 20', ou: true, line: 20 }
+];
+
+// ============================================================================
+// PURE LOGIC (no DOM). Covered by tests.
+// ============================================================================
+const NAMES = { D: 'Dolphins', L: 'Long-Teens' };
+
+function strokesOnHole(diff, hole) {
+  const si = STROKE_INDEX[hole - 1];
+  return Math.floor(diff / 18) + (si <= diff % 18 ? 1 : 0);
+}
+function matchPlayers(m) {
+  return [...m.dolphins, ...m.longteens].map((id) => ({ id, ...PLAYERS[id] }));
+}
+function matchStrokeTable(m) {
+  const ps = matchPlayers(m);
+  const low = Math.min(...ps.map((p) => p.hcp));
+  return ps.map((p) => {
+    const diff = p.hcp - low;
+    return { ...p, diff, perHole: Array.from({ length: 18 }, (_, i) => strokesOnHole(diff, i + 1)) };
+  });
+}
+function holesOf(docData) {
+  const out = {};
+  if (!docData) return out;
+  for (let h = 1; h <= 18; h++) {
+    const v = docData['h' + h];
+    if (v === 'D' || v === 'L' || v === 'H') out[h] = v;
+  }
+  return out;
+}
+function tallyNine(holes, nine) {
+  const start = nine * 9 + 1;
+  let D = 0, L = 0, H = 0, played = 0, last = 0;
+  for (let i = 0; i < 9; i++) {
+    const v = holes[start + i];
+    if (v) {
+      played++; last = start + i;
+      if (v === 'D') D++; else if (v === 'L') L++; else H++;
+    }
+  }
+  const lead = D - L;
+  const remaining = 9 - played;
+  const clinched = remaining > 0 && Math.abs(lead) > remaining;
+  const final = played === 9 || clinched;
+  const winner = lead > 0 ? 'D' : lead < 0 ? 'L' : null;
+  let pD = 0, pL = 0;
+  if (final) {
+    if (winner === 'D') pD = 1;
+    else if (winner === 'L') pL = 1;
+    else { pD = 0.5; pL = 0.5; }
+  }
+  return { D, L, H, played, last, lead, remaining, clinched, final, winner, pD, pL };
+}
+function liveText(t) {
+  if (!t.played) return 'Not started';
+  if (t.lead === 0) return 'All square thru ' + t.last;
+  return NAMES[t.winner] + ' ' + Math.abs(t.lead) + ' UP thru ' + t.last;
+}
+function statusText(t) {
+  if (!t.played) return 'Not started';
+  if (!t.final) return liveText(t);
+  if (!t.winner) return 'All square · Final · ½ pt each';
+  const lead = Math.abs(t.lead);
+  return t.remaining > 0
+    ? NAMES[t.winner] + ' win ' + lead + '&' + t.remaining + ' · +1 pt'
+    : NAMES[t.winner] + ' ' + lead + ' UP · Final · +1 pt';
+}
+function tallyLine(t) {
+  if (!t.played) return 'Not started';
+  if (t.final && t.winner && t.remaining > 0) return NAMES[t.winner] + ' win ' + Math.abs(t.lead) + '&' + t.remaining;
+  if (t.final && t.played === 9) return t.winner ? NAMES[t.winner] + ' ' + Math.abs(t.lead) + ' UP · Final' : 'All square · Final';
+  return liveText(t);
+}
+function totals(resultsByMatch) {
+  let D = 0, L = 0, played = 0;
+  MATCHES.forEach((m) => {
+    const holes = holesOf(resultsByMatch[m.id]);
+    [0, 1].forEach((nine) => {
+      const t = tallyNine(holes, nine);
+      D += t.pD; L += t.pL; played += t.played;
+    });
+  });
+  return { D, L, played, decided: D + L };
+}
+function overallBanner(tot) {
+  if (tot.D > 3) return 'The Dolphins have clinched the trophy.';
+  if (tot.L > 3) return 'The Long-Teens have clinched the trophy.';
+  if (tot.decided === 6) return 'Tied 3–3. Saturday evening at the Skeist Par 3 decides it.';
+  return '';
+}
+function fmtPts(n) { return Number.isInteger(n) ? String(n) : n.toFixed(1); }
+function daysUntil(now) {
+  const f = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' });
+  const [ty, tm, td] = f.format(now).split('-').map(Number);
+  const [ey, em, ed] = CONFIG.eventDate.split('-').map(Number);
+  return Math.round((Date.UTC(ey, em - 1, ed) - Date.UTC(ty, tm - 1, td)) / 86400000);
+}
+function countdown(now) {
+  const days = daysUntil(now);
+  if (days > 1) return { big: String(days), label: 'days to go' };
+  if (days === 1) return { big: '1', label: 'day to go' };
+  if (days === 0) {
+    const ms = Date.parse(CONFIG.teeOff) - now.getTime();
+    if (ms > 0) { const h = Math.ceil(ms / 3600000); return { big: String(h), label: h === 1 ? 'hour to go' : 'hours to go' }; }
+    return { big: 'Fore', label: "It's golf day" };
+  }
+  return { big: 'Final', label: 'See the scoreboard' };
+}
+function weatherTip(w) {
+  const tips = [];
+  if (w.gust >= 30 || w.wind >= 20) tips.push('Strong wind off the water: club up into it, keep the ball low, and aim away from trouble.');
+  else if (w.wind >= 12 || w.gust >= 22) tips.push('Breezy: take an extra club into the wind and favor the middle of the greens.');
+  else tips.push('Light wind: good scoring conditions, so attack pins you trust.');
+  if (w.temp < 50) tips.push('Cool air carries the ball shorter, so add a club on approach shots.');
+  if (w.rain >= 40) tips.push('Rain is likely: bring a towel and dry gloves.');
+  return tips.join(' ');
+}
+function agoText(ts) {
+  if (!ts) return '';
+  const min = Math.floor((Date.now() - ts) / 60000);
+  if (min < 1) return 'just now';
+  if (min === 1) return '1 min ago';
+  return min + ' min ago';
+}
+// ==== END PURE ====
+
+// ============================================================================
+// APP
+// ============================================================================
+const state = {
+  results: {}, props: {}, error: false, weather: null, weatherErr: false,
+  rec: { m: null, hole: 0, sel: null, touched: false }
+};
+let fb = null;
+
+const viewEl = document.getElementById('view');
+const navEl = document.getElementById('nav');
+const toastEl = document.getElementById('toast');
+let toastTimer = null;
+
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const pairLabel = (ids) => ids.map((id) => PLAYERS[id].label).join(' · ');
+const letterOf = (v) => (v === 'D' ? 'D' : v === 'L' ? 'L' : v === 'H' ? '–' : '');
+const clsOf = (v) => (v === 'D' ? 'd' : v === 'L' ? 'l' : v === 'H' ? 'h' : 'e');
+
+function toast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('on');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('on'), 2400);
+}
+
+const ICON = {
+  tee: '<path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/>',
+  score: '<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a1 1 0 0 0-1 1 3 3 0 0 0 3 3h1"/><path d="M16 6h3a1 1 0 0 1 1 1 3 3 0 0 1-3 3h-1"/><path d="M12 13v4"/><path d="M8 20h8"/>',
+  rankings: '<path d="M6 20v-8"/><path d="M12 20V6"/><path d="M18 20v-5"/>',
+  kalshi: '<path d="M3 17l6-6 4 4 7-8"/><path d="M15 7h5v5"/>'
+};
+function renderNav(active) {
+  const tabs = [['tee', 'Tee Sheet'], ['score', 'Scoreboard'], ['rankings', 'Rankings'], ['kalshi', 'Kalshi']];
+  navEl.innerHTML = tabs.map(([k, label]) =>
+    `<a class="tab${k === active ? ' on' : ''}" href="#/${k}"${k === active ? ' aria-current="page"' : ''}>` +
+    `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>${label}</a>`
+  ).join('');
+}
+
+// ---------- Tee Sheet ----------
+function weatherCard() {
+  const cd = countdown(new Date());
+  const w = state.weather;
+  const vals = w ? [['Temp', w.temp + '°'], ['Wind', w.wind + ' mph'], ['Rain', w.rain + '%']] : [['Temp', '—'], ['Wind', '—'], ['Rain', '—']];
+  const note = w
+    ? `High ${w.hi}° · Low ${w.lo}° · Gusts up to ${w.gust} mph`
+    : (state.weatherErr ? 'Forecast unavailable right now. It will retry shortly.' : 'Loading the forecast…');
+  return `<section class="card p16" aria-label="Countdown and forecast">
+    <div class="wx">
+      <div style="width:96px;flex:none"><div class="bignum">${esc(cd.big)}</div><div style="font-size:13px;font-weight:600;color:var(--mut);margin-top:2px">${esc(cd.label)}</div></div>
+      <div style="flex:1;min-width:0">
+        <div class="lab" style="margin-bottom:8px">Forecast · 10:00 AM</div>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+          ${vals.map(([l, v]) => `<div><div class="statlab">${l}</div><div class="stat">${esc(v)}</div></div>`).join('')}
+        </div>
+      </div>
+    </div>
+    <div class="tipbox">${w ? esc(note) + '. ' + esc(weatherTip(w)) : esc(note)}</div>
+  </section>`;
+}
+function scoreStrip() {
+  const tot = totals(state.results);
+  return `<a class="card strip" href="#/score" aria-label="Open scoreboard">
+    <div class="row" style="gap:10px"><img class="port" src="dolphins.jpg" alt="" width="40" height="40" style="border:2px solid var(--teal)">
+      <div><div style="font-size:12px;font-weight:700;color:var(--teal)">DOLPHINS</div><div style="font-size:28px;font-weight:800;line-height:1">${fmtPts(tot.D)}</div></div></div>
+    <div style="font-size:12px;font-weight:700;color:var(--mut);text-align:center">Scoreboard<br>6 pts available</div>
+    <div class="row" style="gap:10px"><div style="text-align:right"><div style="font-size:12px;font-weight:700;color:var(--limetxt)">LONG-TEENS</div><div style="font-size:28px;font-weight:800;line-height:1">${fmtPts(tot.L)}</div></div>
+      <img class="port" src="longteens.jpg" alt="" width="40" height="40" style="border:2px solid var(--lime)"></div>
+  </a>`;
+}
+function matchesCard() {
+  const times = MATCHES.map((m) => m.time.replace(' AM', '')).join(', ');
+  const rows = MATCHES.map((m, i) => `<div>
+      <div class="lab" style="margin-bottom:6px">Match ${i + 1} · ${esc(m.time)}${CONFIG.pairingsFinal ? '' : ' · Placeholder'}</div>
+      <div class="duo"><div class="side d">${esc(pairLabel(m.dolphins))}</div><div class="side l">${esc(pairLabel(m.longteens))}</div></div>
+    </div>`).join('');
+  return `<section class="card p16"><h2>The matches</h2>
+    ${CONFIG.pairingsFinal ? '' : `<div class="note">Tee times are ${esc(times)}. Pairings and who goes when will be finalized with The Friday Evening Selection Process.</div>`}
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">${rows}</div>
+    <a class="btnlink" href="#/strokes">See who gets a stroke on every hole<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
+  </section>`;
+}
+function howCard() {
+  const item = (n, t, d, cls) => `<div class="step"><div class="badge${cls ? ' ' + cls : ''}">${n}</div><div><b>${t}</b><span>${d}</span></div></div>`;
+  return `<section class="card p16"><h2>How it works</h2><div class="steps">
+    ${item(1, '3 matches, 2v2', 'Lowest score on each hole wins the hole.')}
+    ${item(2, 'Front 9 and back 9, 1 point each', 'Win more holes on a nine to take the point. A halved nine splits ½ each. A nine can end early once a lead is bigger than the holes left.')}
+    ${item(3, '6 points, one trophy', 'If it ends 3–3, the tiebreak is a Saturday evening match at the Skeist Par 3.')}
+    ${item(4, 'Whites for everyone', 'Full scorecards live in 18Birdies. This page only tracks who wins each hole.')}
+    ${item('!', 'Respect pace of play', 'That means you, Ashwin.', 'rust')}
+  </div></section>`;
+}
+function rosterCard(team) {
+  const d = team === 'D';
+  const rows = ROSTER[team].map((id) => {
+    const p = PLAYERS[id];
+    return `<div class="prow"><span>${esc(p.name)}</span><em>HCP ${p.hcp}${p.max ? ' (max)' : ''}</em></div>`;
+  }).join('');
+  return `<section class="card roster">
+    <div class="rhead ${d ? 'd' : 'l'}"><img class="port" src="${d ? 'dolphins.jpg' : 'longteens.jpg'}" alt="" width="56" height="56" style="border:2px solid ${d ? 'var(--teal)' : 'var(--lime)'}">
+      <div><div style="font-size:20px;font-weight:800;letter-spacing:-.01em;color:${d ? 'var(--teal)' : 'var(--limetxt)'}">${d ? 'The Dolphins' : 'Long-Teens'}</div>
+      <div style="font-size:13px;font-weight:600;color:#34444F">${d ? '6 players' : 'For Climate Change · 6 players'}</div></div></div>
+    ${rows}</section>`;
+}
+function viewTee() {
+  const times = MATCHES.map((m) => m.time.replace(' AM', '')).join(' · ');
+  return `<img class="hero" src="hero.jpg" alt="The Montauk lighthouse and clubhouse across the water" width="480" height="250">
+  <div class="pad" style="padding-top:20px">
+    <div class="eyebrow">The return to Montauk Downs</div>
+    <h1>The Stern Fall Classic</h1>
+    <div class="chips"><span class="chip">Sat, Oct 24, 2026</span><span class="chip">Montauk Downs · Whites</span><span class="chip">Tee times ${esc(times)}</span></div>
+  </div>
+  <div class="stack">
+    ${weatherCard()}${scoreStrip()}${matchesCard()}${howCard()}${rosterCard('D')}${rosterCard('L')}
+    <p class="foot">Handicaps set the strokes in each match. Scoring on this page is hole-by-hole results only.</p>
+  </div>`;
+}
+
+// ---------- Scoreboard ----------
+function tile(mid, n, v, extra) {
+  return `<a class="cell ${clsOf(v)}${extra ? ' ' + extra : ''}" href="#/record/${mid}/${n}" aria-label="Hole ${n}${v ? ', ' + (v === 'D' ? 'Dolphins won' : v === 'L' ? 'Long-Teens won' : 'halved') : ', not recorded'}"><span class="n">${n}</span><span class="t">${letterOf(v)}</span></a>`;
+}
+function matchCard(m, idx) {
+  const holes = holesOf(state.results[m.id]);
+  const block = (nine) => {
+    const t = tallyNine(holes, nine);
+    const cls = t.final ? (t.winner === 'D' ? 'dt' : t.winner === 'L' ? 'lt' : 'ht') : (t.played === 0 ? 'mt' : t.lead > 0 ? 'dt' : t.lead < 0 ? 'lt' : 'ht');
+    let tiles = '';
+    for (let i = 0; i < 9; i++) { const n = nine * 9 + 1 + i; tiles += tile(m.id, n, holes[n]); }
+    return `<div class="rowhd"><span class="lab">${nine === 0 ? 'Front 9' : 'Back 9'}</span><span class="st ${cls}">${esc(statusText(t))}</span></div><div class="g9">${tiles}</div>`;
+  };
+  return `<section class="card p16">
+    <div class="mhead"><span class="lab">Match ${idx + 1} · ${esc(m.time)}</span><a href="#/strokes">Strokes by hole</a></div>
+    <div class="duo" style="margin-top:10px">
+      <div class="side d"><small>Dolphins</small>${esc(pairLabel(m.dolphins))}</div>
+      <div class="side l"><small>Long-Teens</small>${esc(pairLabel(m.longteens))}</div>
+    </div>
+    ${block(0)}${block(1)}
+  </section>`;
+}
+function viewScore() {
+  const tot = totals(state.results);
+  const banner = overallBanner(tot);
+  return `<header class="pad top"><div class="eyebrow">The Stern Fall Classic</div><h1>Scoreboard</h1>
+    ${CONFIG.pairingsFinal ? '' : `<div class="tag">Placeholder pairings until Friday's selection</div>`}</header>
+  <div class="stack">
+    <section class="card scorecard" aria-label="Team totals">
+      <div class="scorecols">
+        <div class="scorecol"><img class="port" src="dolphins.jpg" alt="" width="56" height="56" style="border:3px solid var(--teal)"><div style="font-size:13px;font-weight:700;color:var(--teal)">Dolphins</div><div class="scorenum" style="color:var(--teal)">${fmtPts(tot.D)}</div></div>
+        <div style="font-size:13px;font-weight:700;color:var(--mut);padding:0 4px">vs</div>
+        <div class="scorecol"><img class="port" src="longteens.jpg" alt="" width="56" height="56" style="border:3px solid var(--lime)"><div style="font-size:13px;font-weight:700;color:var(--limetxt)">Long-Teens</div><div class="scorenum" style="color:var(--limetxt)">${fmtPts(tot.L)}</div></div>
+      </div>
+      <div style="margin-top:16px;text-align:center;font-size:13px;color:var(--mut);font-weight:600">${fmtPts(tot.decided)} of 6 points decided · ${tot.played} of 54 holes played</div>
+      ${banner ? `<div class="win">${esc(banner)}</div>` : ''}
+    </section>
+    <div class="dark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A9D63B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none"><path d="M12 3v18"/><path d="M12 3l7 3-7 3"/></svg><div><b>Tied 3–3?</b> Saturday evening match at the Skeist Par 3 decides it.</div></div>
+    <div class="legend"><span><i class="sw" style="background:var(--teal)"></i>D = Dolphins win hole</span><span><i class="sw" style="background:var(--lime)"></i>L = Long-Teens win hole</span><span><i class="sw" style="background:var(--halved)"></i>– = Halved</span></div>
+    ${MATCHES.map(matchCard).join('')}
+    <p class="foot" style="text-align:center;font-size:13px;font-weight:600">Tap any hole to record who won it</p>
+  </div>`;
+}
+
+// ---------- Strokes ----------
+function strokeGrid(table, start) {
+  let h = '<div class="g hd">Hole</div>';
+  for (let i = 0; i < 9; i++) h += `<div class="g hd">${start + i}</div>`;
+  h += '<div class="g si">SI</div>';
+  for (let i = 0; i < 9; i++) h += `<div class="g si">${STROKE_INDEX[start - 1 + i]}</div>`;
+  table.forEach((p) => {
+    h += `<div class="g nm ${p.team === 'D' ? 'nd' : 'nl'}">${esc(p.first)}</div>`;
+    for (let i = 0; i < 9; i++) {
+      const k = p.perHole[start - 1 + i];
+      h += k > 0 ? `<div class="g ${p.team === 'D' ? 'sd' : 'sl'}" aria-label="${k} stroke${k > 1 ? 's' : ''}">${k > 1 ? '●●' : '●'}</div>` : '<div class="g z"></div>';
+    }
+  });
+  return `<div class="sg">${h}</div>`;
+}
+function viewStrokes() {
+  const cards = MATCHES.map((m, i) => {
+    const table = matchStrokeTable(m);
+    const lows = table.filter((p) => p.diff === 0);
+    const others = table.filter((p) => p.diff > 0);
+    let note = lows.map((p) => p.first).join(' and ') + ' (' + lows[0].hcp + (lows.length > 1 ? ') are the low men.' : ') is the low man.');
+    if (others.length) note += ' Strokes: ' + others.map((p) => p.first + ' ' + p.diff).join(', ') + '.';
+    if (others.some((p) => p.diff > 18)) note += ' Anyone over 18 gets a second stroke on the hardest holes.';
+    return `<section class="card p16">
+      <div class="lab">Match ${i + 1} · ${esc(m.time)}</div>
+      <div style="font-size:15px;font-weight:800;margin-top:4px">${esc(pairLabel(m.dolphins))} vs ${esc(pairLabel(m.longteens))}</div>
+      <div style="font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px">${esc(note)}</div>
+      <div class="lab" style="margin:16px 0 8px">Front 9</div>${strokeGrid(table, 1)}
+      <div class="lab" style="margin:18px 0 8px">Back 9</div>${strokeGrid(table, 10)}
+    </section>`;
+  }).join('');
+  return `<div style="padding:8px 8px 0"><a class="back" href="#/score"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Scoreboard</a></div>
+  <div class="pad" style="padding-top:4px"><div class="eyebrow">The Stern Fall Classic</div><h1>Strokes by hole</h1>
+    <div class="sub">In each match, everyone plays off the lowest handicap of the four. A dot marks a hole where that player gets a stroke.</div>
+    <div class="legend" style="margin-top:12px;padding:0"><span><i class="sw" style="background:var(--teal);width:22px;height:18px"></i>Dolphins stroke</span><span><i class="sw" style="background:var(--lime);width:22px;height:18px"></i>Long-Teens stroke</span><span><b style="font-size:10px">●●</b>Two strokes</span></div>
+    ${CONFIG.pairingsFinal ? '' : `<div class="tag">Placeholder pairings until Friday's selection</div>`}
+  </div>
+  <div class="stack">${cards}<p class="foot">SI is the stroke index (hole handicap) from the Montauk Downs scorecard: 1 is the hardest hole, 18 the easiest.</p></div>`;
+}
+
+// ---------- Record a hole ----------
+function viewRecord(mid, hole) {
+  const m = MATCHES.find((x) => x.id === mid);
+  if (!m || !(hole >= 1 && hole <= 18)) {
+    return `<div class="stack"><div class="card p16">That match or hole isn't on the card. <a class="lnk" href="#/score">Back to the scoreboard</a></div></div>`;
+  }
+  const holes = holesOf(state.results[mid]);
+  const saved = holes[hole] || null;
+  const sel = state.rec.touched ? state.rec.sel : saved;
+  const nine = hole <= 9 ? 0 : 1;
+  const before = tallyNine(holes, nine);
+  const hyp = { ...holes }; if (sel) hyp[hole] = sel;
+  const after = tallyNine(hyp, nine);
+  const changed = sel && sel !== saved;
+  const getters = matchStrokeTable(m).filter((p) => p.perHole[hole - 1] > 0);
+  const strokeLine = getters.length
+    ? 'Strokes on this hole: ' + getters.map((p) => p.first + (p.perHole[hole - 1] > 1 ? ' ×2' : '')).join(', ') + '.'
+    : `No strokes on this hole in this match (stroke index ${STROKE_INDEX[hole - 1]}).`;
+  const last = state.results[mid] && state.results[mid].last;
+
+  let chips = '';
+  for (let r = 0; r < 2; r++) {
+    let row = '';
+    for (let i = 0; i < 9; i++) { const n = r * 9 + 1 + i; row += tile(mid, n, holes[n], n === hole ? 'sel' : ''); }
+    chips += `<div class="g9" style="margin-top:${r ? 4 : 0}px">${row}</div>`;
+  }
+  const check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F2230" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
+  const opt = (val, cls, title, subtitle) => `<button type="button" class="opt ${cls}${sel === val ? ' sel' : ''}" data-act="pick" data-val="${val}" aria-pressed="${sel === val}"><span><b>${title}</b><span class="s">${esc(subtitle)}</span></span><span class="radio">${sel === val ? check : ''}</span></button>`;
+
+  return `<div class="row" style="gap:8px;height:56px;padding:0 8px">
+      <a href="#/score" aria-label="Back to scoreboard" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F2230" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
+      <div><div class="lab">Match ${MATCHES.indexOf(m) + 1} · ${nine === 0 ? 'Front 9' : 'Back 9'}</div><div style="font-size:15px;font-weight:700">${esc(pairLabel(m.dolphins))} vs ${esc(pairLabel(m.longteens))}</div></div>
+    </div>
+    <div class="pad" style="padding-top:8px">
+      ${chips}
+      <h1 style="margin:24px 0 4px">Who won hole ${hole}?</h1>
+      <div style="font-size:14px;color:var(--mut);line-height:1.4">Lowest score on the hole wins it. ${esc(strokeLine)}</div>
+      <div class="opts">
+        ${opt('D', 'd', 'Dolphins', pairLabel(m.dolphins))}
+        ${opt('H', 'h', 'Halved', 'Best ball is tied')}
+        ${opt('L', 'l', 'Long-Teens', pairLabel(m.longteens))}
+      </div>
+      <div class="tally">
+        <div><div class="lab">${nine === 0 ? 'Front 9' : 'Back 9'} tally</div><div style="font-size:15px;font-weight:700;margin-top:2px">${esc(tallyLine(before))}</div></div>
+        ${changed ? `<div class="r">After saving<br>${esc(tallyLine(after))}</div>` : ''}
+      </div>
+      <button type="button" class="save" data-act="save"${sel ? '' : ' disabled'}>Save hole ${hole}</button>
+      ${last ? `<div class="undo"><span>Hole ${last.hole} saved ${esc(agoText(last.ts))}</span><button type="button" data-act="undo" data-m="${mid}">Undo</button></div>` : ''}
+    </div>`;
+}
+
+// ---------- Rankings ----------
+function viewRankings() {
+  const url = CONFIG.rankingsDocUrl;
+  const body = url
+    ? `<section class="card docframe"><div class="docbar">The 2026 Rankings</div><iframe src="${esc(url)}" title="Hart's Rankings" loading="lazy"></iframe></section>
+       <a class="btnlink" href="${esc(url)}" target="_blank" rel="noopener">Open in a new tab</a>`
+    : `<section class="card docframe"><div class="docbar">The 2026 Rankings</div>
+        <div class="p16" style="padding:20px 16px"><div style="font-size:18px;font-weight:800">Hart's rankings land here before the first tee.</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px"><div class="bar" style="width:100%"></div><div class="bar" style="width:94%"></div><div class="bar" style="width:98%"></div><div class="bar" style="width:60%"></div></div></div></section>`;
+  return `<header class="pad top"><div class="eyebrow">The annual write-up</div><h1>Hart's Rankings</h1>
+    <div class="sub">Every golfer in the field, ranked and roasted by Hart Zeitler.</div></header>
+    <div class="stack">${body}</div>`;
+}
+
+// ---------- Kalshi Korner ----------
+function propCard(p) {
+  const st = (state.props[p.id] && state.props[p.id].status) || null;
+  const settleBtns = p.ou
+    ? [['over', 'Over'], ['under', 'Under']]
+    : [['hit', 'Hit'], ['miss', 'Miss']];
+  const resultLabel = st ? (settleBtns.find((b) => b[0] === st) || [st, st])[1] : '';
+  const yes = p.ou ? `Over ${p.line} · 50¢` : `Yes ${p.yes}¢`;
+  const no = p.ou ? `Under ${p.line} · 50¢` : `No ${p.no}¢`;
+  const info = p.ou ? 'Even money' : `Implied chance ${p.pct}%`;
+  return `<section class="card prop">
+    <div class="row between" style="align-items:flex-start;gap:12px">
+      <div><div class="ttl">${esc(p.title)}</div>${p.sub ? `<div class="psub">${esc(p.sub)}</div>` : ''}</div>
+      <div class="odds">${esc(p.badge)}</div>
+    </div>
+    <div class="row" style="gap:10px;margin-top:14px"><div class="px yes">${esc(yes)}</div><div class="px no">${esc(no)}</div></div>
+    <div class="row between" style="margin-top:10px;gap:8px">
+      ${st ? `<span class="result${st === 'miss' || st === 'under' ? ' no' : ''}">${esc(resultLabel)}</span>` : `<span style="font-size:12px;font-weight:600;color:var(--mut)">${info} · Open</span>`}
+      <span class="row" style="gap:8px">${st
+        ? `<button type="button" class="settle" data-act="reopen" data-id="${p.id}">Reopen</button>`
+        : settleBtns.map(([v, l]) => `<button type="button" class="settle" data-act="settle" data-id="${p.id}" data-val="${v}">${l}</button>`).join('')}</span>
+    </div>
+  </section>`;
+}
+function viewKalshi() {
+  return `<header class="pad top"><div class="eyebrow">For entertainment only</div><h1>Kalshi Korner</h1>
+    <div class="sub">Joke prop bets for the weekend. No real money, just reputations.</div></header>
+    <div class="stack" style="gap:14px">${PROPS.map(propCard).join('')}
+      <div class="more">More props coming</div>
+      <p class="foot">Not affiliated with Kalshi. Prices are the odds converted to cents. Hit and Miss settle a prop for everyone.</p></div>`;
+}
+
+// ---------- Router and render ----------
+function parseRoute() { return (location.hash || '#/tee').replace(/^#\/?/, '').split('/'); }
+function render() {
+  const [name, a, b] = parseRoute();
+  let html, active = name;
+  switch (name) {
+    case 'score': html = viewScore(); break;
+    case 'strokes': html = viewStrokes(); active = 'score'; break;
+    case 'record': html = viewRecord(a, parseInt(b, 10)); active = 'score'; break;
+    case 'rankings': html = viewRankings(); break;
+    case 'kalshi': html = viewKalshi(); break;
+    default: html = viewTee(); active = 'tee';
+  }
+  const warn = state.error ? `<div class="warn" role="alert">Live scoring can't connect right now. Check your signal. Results won't sync until it's back.</div>` : '';
+  viewEl.innerHTML = warn + html;
+  renderNav(active);
+}
+function onRouteChange() {
+  const [name, a, b] = parseRoute();
+  if (name === 'record') {
+    const hole = parseInt(b, 10);
+    if (state.rec.m !== a || state.rec.hole !== hole) state.rec = { m: a, hole, sel: null, touched: false };
+  }
+  render();
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', onRouteChange);
+
+// ---------- Writes ----------
+function saveHole(mid, hole, val) {
+  const prev = holesOf(state.results[mid])[hole] || null;
+  return fb.setDoc(fb.doc(fb.db, 'results', mid), { ['h' + hole]: val, last: { hole, prev, ts: Date.now() } }, { merge: true });
+}
+function undoLast(mid) {
+  const last = state.results[mid] && state.results[mid].last;
+  if (!last) return Promise.resolve();
+  return fb.setDoc(fb.doc(fb.db, 'results', mid), { ['h' + last.hole]: last.prev ? last.prev : fb.deleteField(), last: fb.deleteField() }, { merge: true });
+}
+function setProp(id, val) {
+  return fb.setDoc(fb.doc(fb.db, 'props', id), { status: val ? val : fb.deleteField() }, { merge: true });
+}
+function offlineToast() { toast("Live scoring isn't connected. Check your signal and try again."); }
+
+document.addEventListener('click', (e) => {
+  const el = e.target.closest('[data-act]');
+  if (!el) return;
+  const act = el.dataset.act;
+  if (act === 'pick') {
+    state.rec.sel = el.dataset.val; state.rec.touched = true; render();
+  } else if (act === 'save') {
+    const { m, hole } = state.rec;
+    const holes = holesOf(state.results[m]);
+    const sel = state.rec.touched ? state.rec.sel : (holes[hole] || null);
+    if (!sel) return;
+    if (sel !== holes[hole]) {
+      if (!fb) { offlineToast(); return; }
+      saveHole(m, hole, sel).catch((err) => { console.error(err); toast("Couldn't save hole " + hole + '. Try again.'); });
+      toast('Hole ' + hole + ' saved');
+    }
+    const next = Math.min(hole + 1, 18);
+    if (next === hole) { state.rec.touched = false; render(); }
+    else location.hash = '#/record/' + m + '/' + next;
+  } else if (act === 'undo') {
+    if (!fb) { offlineToast(); return; }
+    const last = state.results[el.dataset.m] && state.results[el.dataset.m].last;
+    undoLast(el.dataset.m).catch((err) => { console.error(err); toast("Couldn't undo. Try again."); });
+    if (last) toast('Undid hole ' + last.hole);
+    state.rec.touched = false;
+  } else if (act === 'settle' || act === 'reopen') {
+    if (!fb) { offlineToast(); return; }
+    setProp(el.dataset.id, act === 'settle' ? el.dataset.val : null).catch((err) => { console.error(err); toast("Couldn't update the prop. Try again."); });
+  }
+});
+
+// ---------- Live data ----------
+async function initFirebase() {
+  try {
+    const [appMod, storeMod] = await Promise.all([import(FB_APP_URL), import(FB_STORE_URL)]);
+    const app = appMod.initializeApp(firebaseConfig);
+    const db = storeMod.getFirestore(app);
+    fb = { db, doc: storeMod.doc, setDoc: storeMod.setDoc, deleteField: storeMod.deleteField };
+    const listen = (name, key) => storeMod.onSnapshot(storeMod.collection(db, name), (snap) => {
+      const next = {};
+      snap.forEach((d) => { next[d.id] = d.data(); });
+      state[key] = next; state.error = false; render();
+    }, (err) => { console.error(err); state.error = true; render(); });
+    listen('results', 'results');
+    listen('props', 'props');
+  } catch (err) {
+    console.error(err);
+    state.error = true; render();
+  }
+}
+
+async function loadWeather() {
+  const d = CONFIG.eventDate, { lat, lon } = CONFIG.coords;
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+      `&hourly=temperature_2m,precipitation_probability,wind_speed_10m,wind_gusts_10m` +
+      `&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph` +
+      `&timezone=America%2FNew_York&start_date=${d}&end_date=${d}`;
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const j = await r.json();
+    const i = j.hourly.time.indexOf(d + 'T10:00');
+    if (i < 0) throw new Error('No 10 AM hour in forecast');
+    const win = (arr) => arr.slice(i, i + 6).filter((x) => x != null);
+    state.weather = {
+      temp: Math.round(j.hourly.temperature_2m[i]),
+      wind: Math.round(j.hourly.wind_speed_10m[i]),
+      gust: Math.round(Math.max(...win(j.hourly.wind_gusts_10m))),
+      rain: Math.round(Math.max(...win(j.hourly.precipitation_probability))),
+      hi: Math.round(j.daily.temperature_2m_max[0]),
+      lo: Math.round(j.daily.temperature_2m_min[0])
+    };
+    state.weatherErr = false;
+  } catch (err) {
+    console.error(err);
+    state.weatherErr = true;
+  }
+  if (parseRoute()[0] === 'tee' || !location.hash) render();
+}
+
+onRouteChange();
+initFirebase();
+loadWeather();
+setInterval(loadWeather, 30 * 60 * 1000);
+</script>
+</body>
+</html>
