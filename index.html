@@ -118,6 +118,19 @@ h2{margin:0 0 12px;font-size:18px;font-weight:800;letter-spacing:-.01em}
 .docframe{overflow:hidden}
 .docframe iframe{display:block;width:100%;height:70vh;border:0;background:#fff}
 .bar{height:10px;border-radius:5px;background:var(--line)}
+.tierh{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.tierb{margin:4px 0 12px;font-size:14px;color:var(--mut);line-height:1.4}
+.ranklist{overflow:hidden}
+.rank{display:flex;gap:14px;padding:16px;border-top:1px solid var(--line)}
+.rank:first-child{border-top:0}
+.rnum{width:40px;height:40px;flex:none;border-radius:12px;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.rnum.d{background:var(--teal);color:#fff}
+.rnum.l{background:var(--lime);color:var(--ink)}
+.rname{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.rteam{font-size:11px;font-weight:700;margin-left:6px;text-transform:uppercase;letter-spacing:.06em}
+.rteam.d{color:var(--teal)}
+.rteam.l{color:var(--limetxt)}
+.rnote{margin-top:6px;font-size:14px;line-height:1.45;color:#34444F}
 .prop{padding:16px}
 .prop .ttl{font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
 .prop .psub{font-size:13px;font-weight:600;color:var(--mut);margin-top:2px}
@@ -197,13 +210,41 @@ const MATCHES = [
   { id: 'm3', time: '10:33 AM', dolphins: ['david', 'mahaesh'], longteens: ['ashwin', 'josh'] }
 ];
 
+// Hart's power rankings. Edit the text here. Wrap a word in *asterisks* to italicize it.
+const RANKINGS = [
+  { title: `Impressing the Cart Girl`, blurb: `Players to put on the tee when we need to look semi-competent`, players: [
+    { rank: 1, id: 'john', name: 'John', note: `Will we ever see real competition for this spot? Maybe one year we need to invite a ringer just to add some spice to the top of the list` },
+    { rank: 2, id: 'david', name: 'David', note: `New Long Island resident, which brings an expectation of prowess on the course. A touch of consistency could have him challenging his brother for the top spot` }
+  ] },
+  { title: `Try Hards`, blurb: `Most likely to trade precious hours of their brief lives to shave 3-4 strokes off their game, impressing no one`, players: [
+    { rank: 3, id: 'charlie', name: 'Charlie', note: `Likely winner of the 'most rounds 2026' award. Low round of his life at Marine Park, will be looking to ride that high for a strong showing in Montauk` },
+    { rank: 4, id: 'hart', name: 'Hart', note: `No Kids. Low-pressure job. Access to a car and plenty of time to practice. Another year of taking advantage of none of that, and slowing atrophying down the rankings` }
+  ] },
+  { title: `Sniffing 100`, blurb: `Athletic talent that hasn't fully translated to results in the SFC, will the midfield have a breakout showing?`, players: [
+    { rank: 5, id: 'bryan', name: 'Bryan', note: `The committee doesn't have a lot to go on, so this high ranking is largely a reflection of those around him falling down. Stand still to get ahead.` },
+    { rank: 6, id: 'alastair', name: 'Al', note: `Looked good at the tune-up round. Apart from a lack of dedication to the game, a willingness to mock and belittle the sport isn't doing any favors for the rankings` },
+    { rank: 7, id: 'paul', name: 'Paul', note: `Truly remarkable that breaking 100 hasn't happened. This is up there with Marino not winning a super bowl and the Bills blowing it 4 years in a row, or Gary Ablett Sr. never taking home the premiership with Geelong` }
+  ] },
+  { title: `You know you're allowed to practice?`, blurb: `Earned 8s, pace of play and a chance the last time they touched a club was the previous year's SFC`, players: [
+    { rank: 8, id: 'mahaesh', name: 'Mahaesh', note: `Clearly made a deal with a devil to trade prowess at hospitality and social functions with aptitude for golf` },
+    { rank: 9, id: 'ryan', name: 'Ryan', note: `The committee is aware of the frequent hike - and would encourage spoiling some of those good walks` },
+    { rank: 10, id: 'ashwin', name: 'Ashwin', note: `Believe it or not, pace of play plays a role everywhere, even in the power rankings. While not to blame for the recent 6-hour round, the committee hopes to avoid such a result in Montauk` },
+    { rank: 11, id: 'henry', name: 'Henry', note: `A true wild card who has shown flashes in the past - but he'll have to prove the doubters wrong on the course and show the arm wrestling injury isn't problematic` }
+  ] },
+  { title: `People who went to the wrong business school`, blurb: ``, players: [
+    { rank: 12, id: 'josh', name: 'Josh', note: `This is the *STERN* fall classic afterall, we can't have a rival putting pressure on the rankings` }
+  ] }
+];
+
 // Kalshi Korner props. Prices are the odds converted to cents.
 const PROPS = [
   { id: 'allie',        title: 'Allie goes into labor', badge: '20:1', yes: 5,  no: 95, pct: 5 },
   { id: 'paul-zip',     title: 'Paul naked zip lines',  badge: '5:1',  yes: 17, no: 83, pct: 17 },
+  { id: 'hart-zip',     title: 'Hart naked zip lines',  badge: '10000:1', yes: 0.01, no: 99.99, pct: 0.01 },
   { id: 'hart-sfc',     title: 'Hart SFC proposal',     badge: '10:1', yes: 9,  no: 91, pct: 9 },
   { id: 'charlie-puke', title: 'Anytime Charlie puke',  badge: '2:1',  yes: 33, no: 67, pct: 33 },
-  { id: 'ashwin-balls', title: "Ashwin's lost balls", sub: 'Over/under 20 across 18 holes', badge: 'O/U 20', ou: true, line: 20 }
+  { id: 'ashwin-balls', title: "Ashwin's lost balls", sub: 'Over/under 20 across 18 holes', badge: 'O/U 20', ou: true, line: 20 },
+  { id: 'john-clubs',   title: "John's club tosses", sub: 'Over/under 1.5 across 18 holes', badge: 'O/U 1.5', ou: true, line: 1.5 }
 ];
 
 // ============================================================================
@@ -586,17 +627,31 @@ function viewRecord(mid, hole) {
 }
 
 // ---------- Rankings ----------
-function viewRankings() {
+function rankRow(p) {
+  const pl = PLAYERS[p.id];
+  const t = pl.team === 'D' ? 'd' : 'l';
+  const note = esc(p.note).replace(/\*(.+?)\*/g, '<em>$1</em>');
+  return `<div class="rank"><div class="rnum ${t}" aria-label="Rank ${p.rank}">${p.rank}</div>
+    <div style="flex:1;min-width:0"><div class="rname">${esc(p.name)}<span class="rteam ${t}">${NAMES[pl.team]}</span></div><div class="rnote">${note}</div></div></div>`;
+}
+function rankingsBody() {
+  if (RANKINGS.length) {
+    return RANKINGS.map((t) => `<section aria-label="${esc(t.title)}"><h2 class="tierh">${esc(t.title)}</h2>
+      ${t.blurb ? `<p class="tierb">${esc(t.blurb)}</p>` : '<div style="height:12px"></div>'}
+      <div class="card ranklist">${t.players.map(rankRow).join('')}</div></section>`).join('');
+  }
   const url = CONFIG.rankingsDocUrl;
-  const body = url
+  return url
     ? `<section class="card docframe"><div class="docbar">The 2026 Rankings</div><iframe src="${esc(url)}" title="Hart's Rankings" loading="lazy"></iframe></section>
        <a class="btnlink" href="${esc(url)}" target="_blank" rel="noopener">Open in a new tab</a>`
     : `<section class="card docframe"><div class="docbar">The 2026 Rankings</div>
         <div class="p16" style="padding:20px 16px"><div style="font-size:18px;font-weight:800">Hart's rankings land here before the first tee.</div>
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px"><div class="bar" style="width:100%"></div><div class="bar" style="width:94%"></div><div class="bar" style="width:98%"></div><div class="bar" style="width:60%"></div></div></div></section>`;
+}
+function viewRankings() {
   return `<header class="pad top"><div class="eyebrow">The annual write-up</div><h1>Hart's Rankings</h1>
     <div class="sub">Every golfer in the field, ranked and roasted by Hart Zeitler.</div></header>
-    <div class="stack">${body}</div>`;
+    <div class="stack" style="gap:24px">${rankingsBody()}</div>`;
 }
 
 // ---------- Kalshi Korner ----------
