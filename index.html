@@ -118,6 +118,31 @@ h2{margin:0 0 12px;font-size:18px;font-weight:800;letter-spacing:-.01em}
 .docframe{overflow:hidden}
 .docframe iframe{display:block;width:100%;height:70vh;border:0;background:#fff}
 .bar{height:10px;border-radius:5px;background:var(--line)}
+.tierh{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em;line-height:1.2}
+.tierb{margin:4px 0 12px;font-size:14px;color:var(--mut);line-height:1.4}
+.ranklist{overflow:hidden}
+.rank{display:flex;gap:14px;padding:16px;border-top:1px solid var(--line)}
+.rank:first-child{border-top:0}
+.rnum{width:40px;height:40px;flex:none;border-radius:12px;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.rnum.d{background:var(--teal);color:#fff}
+.rnum.l{background:var(--lime);color:var(--ink)}
+.rname{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.rteam{font-size:11px;font-weight:700;margin-left:6px;text-transform:uppercase;letter-spacing:.06em}
+.rteam.d{color:var(--teal)}
+.rteam.l{color:var(--limetxt)}
+.rnote{margin-top:6px;font-size:14px;line-height:1.45;color:#34444F}
+.sublab{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--mut);text-transform:uppercase;margin-bottom:4px}
+.seg{display:flex;background:var(--line);border-radius:12px;padding:4px;gap:4px}
+.seg a{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:9px;font-size:14px;font-weight:700;color:var(--mut);text-align:center}
+.seg a.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(15,34,48,.12)}
+.krow{display:flex;align-items:center;gap:14px;padding:12px 16px;min-height:64px;border-top:1px solid var(--line)}
+.krow:first-child{border-top:0}
+.kname{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.kname.un{font-weight:700;color:#34444F}
+.rnum.n{background:var(--ink);color:#fff}
+.rnum.u{background:var(--line);color:var(--mut);font-size:13px;letter-spacing:.04em}
+.rteam.n{color:var(--mut)}
+.unh{margin:0 0 10px;font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
 .prop{padding:16px}
 .prop .ttl{font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
 .prop .psub{font-size:13px;font-weight:600;color:var(--mut);margin-top:2px}
@@ -173,7 +198,7 @@ const STROKE_INDEX = [11, 17, 9, 5, 3, 13, 7, 15, 1, 2, 18, 14, 8, 16, 6, 10, 12
 // team: 'D' = Dolphins, 'L' = Long-Teens. hcp is used as-is (max = 36).
 const PLAYERS = {
   john:     { name: 'John Malfetano',    first: 'John',    label: 'John M.',    team: 'D', hcp: 11 },
-  david:    { name: 'David Malfetano',   first: 'David',   label: 'David M.',   team: 'D', hcp: 15 },
+  david:    { name: 'David Malfetano',   first: 'David',   label: 'David M.',   team: 'L', hcp: 15 },
   charlie:  { name: 'Charlie Waters',    first: 'Charlie', label: 'Charlie W.', team: 'D', hcp: 20 },
   ryan:     { name: 'Ryan Pennock',      first: 'Ryan',    label: 'Ryan P.',    team: 'D', hcp: 36, max: true },
   bryan:    { name: 'Bryan Gerla',       first: 'Bryan',   label: 'Bryan G.',   team: 'D', hcp: 20 },
@@ -182,28 +207,74 @@ const PLAYERS = {
   alastair: { name: 'Alastair Butler',   first: 'Alastair',label: 'Alastair B.',team: 'L', hcp: 25 },
   paul:     { name: 'Paul Bentley',      first: 'Paul',    label: 'Paul B.',    team: 'L', hcp: 30 },
   ashwin:   { name: 'Ashwin Advani',     first: 'Ashwin',  label: 'Ashwin A.',  team: 'L', hcp: 36, max: true },
-  henry:    { name: 'Henry Marsh',       first: 'Henry',   label: 'Henry M.',   team: 'L', hcp: 28 },
+  henry:    { name: 'Henry Marsh',       first: 'Henry',   label: 'Henry M.',   team: 'D', hcp: 28 },
   josh:     { name: 'Josh Horen',        first: 'Josh',    label: 'Josh H.',    team: 'L', hcp: 36, max: true }
 };
 const ROSTER = {
-  D: ['john', 'david', 'charlie', 'ryan', 'bryan', 'mahaesh'],
-  L: ['hart', 'alastair', 'paul', 'ashwin', 'henry', 'josh']
+  D: ['john', 'charlie', 'bryan', 'henry', 'ryan', 'mahaesh'],
+  L: ['david', 'hart', 'alastair', 'paul', 'ashwin', 'josh']
 };
 
-// PLACEHOLDER pairings until Friday. Edit the ids below, then set pairingsFinal to true.
+// PLACEHOLDER pairings until Friday. Each match is a tee-time slot with its own teams for each nine.
+// Edit the ids below, then set pairingsFinal to true.
 const MATCHES = [
-  { id: 'm1', time: '10:15 AM', dolphins: ['john', 'bryan'],    longteens: ['hart', 'alastair'] },
-  { id: 'm2', time: '10:24 AM', dolphins: ['charlie', 'ryan'],  longteens: ['paul', 'henry'] },
-  { id: 'm3', time: '10:33 AM', dolphins: ['david', 'mahaesh'], longteens: ['ashwin', 'josh'] }
+  { id: 'm1', time: '10:15 AM',
+    front: { dolphins: ['john', 'henry'],      longteens: ['david', 'paul'] },
+    back:  { dolphins: ['john', 'ryan'],       longteens: ['hart', 'paul'] } },
+  { id: 'm2', time: '10:24 AM',
+    front: { dolphins: ['bryan', 'ryan'],      longteens: ['hart', 'josh'] },
+    back:  { dolphins: ['charlie', 'henry'],   longteens: ['david', 'ashwin'] } },
+  { id: 'm3', time: '10:33 AM',
+    front: { dolphins: ['charlie', 'mahaesh'], longteens: ['alastair', 'ashwin'] },
+    back:  { dolphins: ['bryan', 'mahaesh'],   longteens: ['alastair', 'josh'] } }
+];
+
+// Kate's Dad Rankings. Reorder the lines to re-rank. Use { name, tag } for anyone outside the 12 golfers.
+const KATES = {
+  ranked: [
+    { id: 'charlie' }, { id: 'paul' }, { id: 'josh' }, { id: 'alastair' },
+    { name: 'Gadaffi', tag: 'Free Agent' }, { id: 'hart' }
+  ],
+  unranked: [
+    { id: 'mahaesh' }, { id: 'henry' }, { id: 'ryan' }, { id: 'john' }, { id: 'ashwin' }, { id: 'bryan' }, { id: 'david' }
+  ]
+};
+
+// Hart's power rankings. Edit the text here. Wrap a word in *asterisks* to italicize it.
+const RANKINGS = [
+  { title: `Impressing the Cart Girl`, blurb: `Players to put on the tee when we need to look semi-competent`, players: [
+    { rank: 1, id: 'john', name: 'John', note: `Will we ever see real competition for this spot? Maybe one year we need to invite a ringer just to add some spice to the top of the list` },
+    { rank: 2, id: 'david', name: 'David', note: `New Long Island resident, which brings an expectation of prowess on the course. A touch of consistency could have him challenging his brother for the top spot` }
+  ] },
+  { title: `Try Hards`, blurb: `Most likely to trade precious hours of their brief lives to shave 3-4 strokes off their game, impressing no one`, players: [
+    { rank: 3, id: 'charlie', name: 'Charlie', note: `Likely winner of the 'most rounds 2026' award. Low round of his life at Marine Park, will be looking to ride that high for a strong showing in Montauk` },
+    { rank: 4, id: 'hart', name: 'Hart', note: `No Kids. Low-pressure job. Access to a car and plenty of time to practice. Another year of taking advantage of none of that, and slowing atrophying down the rankings` }
+  ] },
+  { title: `Sniffing 100`, blurb: `Athletic talent that hasn't fully translated to results in the SFC, will the midfield have a breakout showing?`, players: [
+    { rank: 5, id: 'bryan', name: 'Bryan', note: `The committee doesn't have a lot to go on, so this high ranking is largely a reflection of those around him falling down. Stand still to get ahead.` },
+    { rank: 6, id: 'alastair', name: 'Al', note: `Looked good at the tune-up round. Apart from a lack of dedication to the game, a willingness to mock and belittle the sport isn't doing any favors for the rankings` },
+    { rank: 7, id: 'paul', name: 'Paul', note: `Truly remarkable that breaking 100 hasn't happened. This is up there with Marino not winning a super bowl and the Bills blowing it 4 years in a row, or Gary Ablett Sr. never taking home the premiership with Geelong` }
+  ] },
+  { title: `You know you're allowed to practice?`, blurb: `Earned 8s, pace of play and a chance the last time they touched a club was the previous year's SFC`, players: [
+    { rank: 8, id: 'mahaesh', name: 'Mahaesh', note: `Clearly made a deal with a devil to trade prowess at hospitality and social functions with aptitude for golf` },
+    { rank: 9, id: 'ryan', name: 'Ryan', note: `The committee is aware of the frequent hike - and would encourage spoiling some of those good walks` },
+    { rank: 10, id: 'ashwin', name: 'Ashwin', note: `Believe it or not, pace of play plays a role everywhere, even in the power rankings. While not to blame for the recent 6-hour round, the committee hopes to avoid such a result in Montauk` },
+    { rank: 11, id: 'henry', name: 'Henry', note: `A true wild card who has shown flashes in the past - but he'll have to prove the doubters wrong on the course and show the arm wrestling injury isn't problematic` }
+  ] },
+  { title: `People who went to the wrong business school`, blurb: ``, players: [
+    { rank: 12, id: 'josh', name: 'Josh', note: `This is the *STERN* fall classic afterall, we can't have a rival putting pressure on the rankings` }
+  ] }
 ];
 
 // Kalshi Korner props. Prices are the odds converted to cents.
 const PROPS = [
   { id: 'allie',        title: 'Allie goes into labor', badge: '20:1', yes: 5,  no: 95, pct: 5 },
   { id: 'paul-zip',     title: 'Paul naked zip lines',  badge: '5:1',  yes: 17, no: 83, pct: 17 },
+  { id: 'hart-zip',     title: 'Hart naked zip lines',  badge: '10000:1', yes: 0.01, no: 99.99, pct: 0.01 },
   { id: 'hart-sfc',     title: 'Hart SFC proposal',     badge: '10:1', yes: 9,  no: 91, pct: 9 },
   { id: 'charlie-puke', title: 'Anytime Charlie puke',  badge: '2:1',  yes: 33, no: 67, pct: 33 },
-  { id: 'ashwin-balls', title: "Ashwin's lost balls", sub: 'Over/under 20 across 18 holes', badge: 'O/U 20', ou: true, line: 20 }
+  { id: 'ashwin-balls', title: "Ashwin's lost balls", sub: 'Over/under 20 across 18 holes', badge: 'O/U 20', ou: true, line: 20 },
+  { id: 'john-clubs',   title: "John's club tosses", sub: 'Over/under 1.5 across 18 holes', badge: 'O/U 1.5', ou: true, line: 1.5 }
 ];
 
 // ============================================================================
@@ -215,11 +286,13 @@ function strokesOnHole(diff, hole) {
   const si = STROKE_INDEX[hole - 1];
   return Math.floor(diff / 18) + (si <= diff % 18 ? 1 : 0);
 }
-function matchPlayers(m) {
-  return [...m.dolphins, ...m.longteens].map((id) => ({ id, ...PLAYERS[id] }));
+function nineTeams(m, nine) { return nine === 0 ? m.front : m.back; }
+function matchPlayers(m, nine) {
+  const t = nineTeams(m, nine);
+  return [...t.dolphins, ...t.longteens].map((id) => ({ id, ...PLAYERS[id] }));
 }
-function matchStrokeTable(m) {
-  const ps = matchPlayers(m);
+function matchStrokeTable(m, nine) {
+  const ps = matchPlayers(m, nine);
   const low = Math.min(...ps.map((p) => p.hcp));
   return ps.map((p) => {
     const diff = p.hcp - low;
@@ -404,20 +477,22 @@ function scoreStrip() {
 }
 function matchesCard() {
   const times = MATCHES.map((m) => m.time.replace(' AM', '')).join(', ');
+  const duo = (t) => `<div class="duo"><div class="side d">${esc(pairLabel(t.dolphins))}</div><div class="side l">${esc(pairLabel(t.longteens))}</div></div>`;
   const rows = MATCHES.map((m, i) => `<div>
-      <div class="lab" style="margin-bottom:6px">Match ${i + 1} · ${esc(m.time)}${CONFIG.pairingsFinal ? '' : ' · Placeholder'}</div>
-      <div class="duo"><div class="side d">${esc(pairLabel(m.dolphins))}</div><div class="side l">${esc(pairLabel(m.longteens))}</div></div>
+      <div class="lab" style="margin-bottom:8px">Match ${i + 1} · ${esc(m.time)}${CONFIG.pairingsFinal ? '' : ' · Placeholder'}</div>
+      <div class="sublab">Front 9</div>${duo(m.front)}
+      <div class="sublab" style="margin-top:10px">Back 9</div>${duo(m.back)}
     </div>`).join('');
   return `<section class="card p16"><h2>The matches</h2>
     ${CONFIG.pairingsFinal ? '' : `<div class="note">Tee times are ${esc(times)}. Pairings and who goes when will be finalized with The Friday Evening Selection Process.</div>`}
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px">${rows}</div>
+    <div style="display:flex;flex-direction:column;gap:18px;margin-top:14px">${rows}</div>
     <a class="btnlink" href="#/strokes">See who gets a stroke on every hole<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a>
   </section>`;
 }
 function howCard() {
   const item = (n, t, d, cls) => `<div class="step"><div class="badge${cls ? ' ' + cls : ''}">${n}</div><div><b>${t}</b><span>${d}</span></div></div>`;
   return `<section class="card p16"><h2>How it works</h2><div class="steps">
-    ${item(1, '3 matches, 2v2', 'Lowest score on each hole wins the hole.')}
+    ${item(1, '3 matches, 2v2', 'Lowest score on each hole wins the hole. Partners switch for the back 9.')}
     ${item(2, 'Front 9 and back 9, 1 point each', 'Win more holes on a nine to take the point. A halved nine splits ½ each. A nine can end early once a lead is bigger than the holes left.')}
     ${item(3, '6 points, one trophy', 'If it ends 3–3, the tiebreak is a Saturday evening match at the Skeist Par 3.')}
     ${item(4, 'Whites for everyone', 'Full scorecards live in 18Birdies. This page only tracks who wins each hole.')}
@@ -458,17 +533,16 @@ function matchCard(m, idx) {
   const holes = holesOf(state.results[m.id]);
   const block = (nine) => {
     const t = tallyNine(holes, nine);
+    const teams = nineTeams(m, nine);
     const cls = t.final ? (t.winner === 'D' ? 'dt' : t.winner === 'L' ? 'lt' : 'ht') : (t.played === 0 ? 'mt' : t.lead > 0 ? 'dt' : t.lead < 0 ? 'lt' : 'ht');
     let tiles = '';
     for (let i = 0; i < 9; i++) { const n = nine * 9 + 1 + i; tiles += tile(m.id, n, holes[n]); }
-    return `<div class="rowhd"><span class="lab">${nine === 0 ? 'Front 9' : 'Back 9'}</span><span class="st ${cls}">${esc(statusText(t))}</span></div><div class="g9">${tiles}</div>`;
+    return `<div class="rowhd"><span class="lab">${nine === 0 ? 'Front 9' : 'Back 9'}</span><span class="st ${cls}">${esc(statusText(t))}</span></div>
+      <div class="duo" style="margin-bottom:8px"><div class="side d"><small>Dolphins</small>${esc(pairLabel(teams.dolphins))}</div><div class="side l"><small>Long-Teens</small>${esc(pairLabel(teams.longteens))}</div></div>
+      <div class="g9">${tiles}</div>`;
   };
   return `<section class="card p16">
     <div class="mhead"><span class="lab">Match ${idx + 1} · ${esc(m.time)}</span><a href="#/strokes">Strokes by hole</a></div>
-    <div class="duo" style="margin-top:10px">
-      <div class="side d"><small>Dolphins</small>${esc(pairLabel(m.dolphins))}</div>
-      <div class="side l"><small>Long-Teens</small>${esc(pairLabel(m.longteens))}</div>
-    </div>
     ${block(0)}${block(1)}
   </section>`;
 }
@@ -511,23 +585,24 @@ function strokeGrid(table, start) {
 }
 function viewStrokes() {
   const cards = MATCHES.map((m, i) => {
-    const table = matchStrokeTable(m);
-    const lows = table.filter((p) => p.diff === 0);
-    const others = table.filter((p) => p.diff > 0);
-    let note = lows.map((p) => p.first).join(' and ') + ' (' + lows[0].hcp + (lows.length > 1 ? ') are the low men.' : ') is the low man.');
-    if (others.length) note += ' Strokes: ' + others.map((p) => p.first + ' ' + p.diff).join(', ') + '.';
-    if (others.some((p) => p.diff > 18)) note += ' Anyone over 18 gets a second stroke on the hardest holes.';
-    return `<section class="card p16">
-      <div class="lab">Match ${i + 1} · ${esc(m.time)}</div>
-      <div style="font-size:15px;font-weight:800;margin-top:4px">${esc(pairLabel(m.dolphins))} vs ${esc(pairLabel(m.longteens))}</div>
-      <div style="font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px">${esc(note)}</div>
-      <div class="lab" style="margin:16px 0 8px">Front 9</div>${strokeGrid(table, 1)}
-      <div class="lab" style="margin:18px 0 8px">Back 9</div>${strokeGrid(table, 10)}
-    </section>`;
+    const nineBlock = (nine) => {
+      const teams = nineTeams(m, nine);
+      const table = matchStrokeTable(m, nine);
+      const lows = table.filter((p) => p.diff === 0);
+      const others = table.filter((p) => p.diff > 0);
+      let note = lows.map((p) => p.first).join(' and ') + ' (' + lows[0].hcp + (lows.length > 1 ? ') are the low men.' : ') is the low man.');
+      if (others.length) note += ' Strokes: ' + others.map((p) => p.first + ' ' + p.diff).join(', ') + '.';
+      if (others.some((p) => p.diff > 18)) note += ' Anyone over 18 gets a second stroke on the hardest holes.';
+      return `<div class="lab" style="margin:${nine ? 22 : 16}px 0 6px">${nine === 0 ? 'Front 9' : 'Back 9'}</div>
+        <div style="font-size:15px;font-weight:800">${esc(pairLabel(teams.dolphins))} vs ${esc(pairLabel(teams.longteens))}</div>
+        <div style="font-size:13px;line-height:1.4;color:var(--mut);margin-top:4px;margin-bottom:10px">${esc(note)}</div>
+        ${strokeGrid(table, nine * 9 + 1)}`;
+    };
+    return `<section class="card p16"><div class="lab">Match ${i + 1} · ${esc(m.time)}</div>${nineBlock(0)}${nineBlock(1)}</section>`;
   }).join('');
   return `<div style="padding:8px 8px 0"><a class="back" href="#/score"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Scoreboard</a></div>
   <div class="pad" style="padding-top:4px"><div class="eyebrow">The Stern Fall Classic</div><h1>Strokes by hole</h1>
-    <div class="sub">In each match, everyone plays off the lowest handicap of the four. A dot marks a hole where that player gets a stroke.</div>
+    <div class="sub">On each nine, everyone plays off the lowest handicap of the four in their match. A dot marks a hole where that player gets a stroke.</div>
     <div class="legend" style="margin-top:12px;padding:0"><span><i class="sw" style="background:var(--teal);width:22px;height:18px"></i>Dolphins stroke</span><span><i class="sw" style="background:var(--lime);width:22px;height:18px"></i>Long-Teens stroke</span><span><b style="font-size:10px">●●</b>Two strokes</span></div>
     ${CONFIG.pairingsFinal ? '' : `<div class="tag">Placeholder pairings until Friday's selection</div>`}
   </div>
@@ -548,7 +623,8 @@ function viewRecord(mid, hole) {
   const hyp = { ...holes }; if (sel) hyp[hole] = sel;
   const after = tallyNine(hyp, nine);
   const changed = sel && sel !== saved;
-  const getters = matchStrokeTable(m).filter((p) => p.perHole[hole - 1] > 0);
+  const teams = nineTeams(m, nine);
+  const getters = matchStrokeTable(m, nine).filter((p) => p.perHole[hole - 1] > 0);
   const strokeLine = getters.length
     ? 'Strokes on this hole: ' + getters.map((p) => p.first + (p.perHole[hole - 1] > 1 ? ' ×2' : '')).join(', ') + '.'
     : `No strokes on this hole in this match (stroke index ${STROKE_INDEX[hole - 1]}).`;
@@ -565,16 +641,16 @@ function viewRecord(mid, hole) {
 
   return `<div class="row" style="gap:8px;height:56px;padding:0 8px">
       <a href="#/score" aria-label="Back to scoreboard" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F2230" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
-      <div><div class="lab">Match ${MATCHES.indexOf(m) + 1} · ${nine === 0 ? 'Front 9' : 'Back 9'}</div><div style="font-size:15px;font-weight:700">${esc(pairLabel(m.dolphins))} vs ${esc(pairLabel(m.longteens))}</div></div>
+      <div><div class="lab">Match ${MATCHES.indexOf(m) + 1} · ${nine === 0 ? 'Front 9' : 'Back 9'}</div><div style="font-size:15px;font-weight:700">${esc(pairLabel(teams.dolphins))} vs ${esc(pairLabel(teams.longteens))}</div></div>
     </div>
     <div class="pad" style="padding-top:8px">
       ${chips}
       <h1 style="margin:24px 0 4px">Who won hole ${hole}?</h1>
       <div style="font-size:14px;color:var(--mut);line-height:1.4">Lowest score on the hole wins it. ${esc(strokeLine)}</div>
       <div class="opts">
-        ${opt('D', 'd', 'Dolphins', pairLabel(m.dolphins))}
+        ${opt('D', 'd', 'Dolphins', pairLabel(teams.dolphins))}
         ${opt('H', 'h', 'Halved', 'Best ball is tied')}
-        ${opt('L', 'l', 'Long-Teens', pairLabel(m.longteens))}
+        ${opt('L', 'l', 'Long-Teens', pairLabel(teams.longteens))}
       </div>
       <div class="tally">
         <div><div class="lab">${nine === 0 ? 'Front 9' : 'Back 9'} tally</div><div style="font-size:15px;font-weight:700;margin-top:2px">${esc(tallyLine(before))}</div></div>
@@ -586,17 +662,54 @@ function viewRecord(mid, hole) {
 }
 
 // ---------- Rankings ----------
-function viewRankings() {
+function rankRow(p) {
+  const pl = PLAYERS[p.id];
+  const t = pl.team === 'D' ? 'd' : 'l';
+  const note = esc(p.note).replace(/\*(.+?)\*/g, '<em>$1</em>');
+  return `<div class="rank"><div class="rnum ${t}" aria-label="Rank ${p.rank}">${p.rank}</div>
+    <div style="flex:1;min-width:0"><div class="rname">${esc(p.name)}<span class="rteam ${t}">${NAMES[pl.team]}</span></div><div class="rnote">${note}</div></div></div>`;
+}
+function rankingsBody() {
+  if (RANKINGS.length) {
+    return RANKINGS.map((t) => `<section aria-label="${esc(t.title)}"><h2 class="tierh">${esc(t.title)}</h2>
+      ${t.blurb ? `<p class="tierb">${esc(t.blurb)}</p>` : '<div style="height:12px"></div>'}
+      <div class="card ranklist">${t.players.map(rankRow).join('')}</div></section>`).join('');
+  }
   const url = CONFIG.rankingsDocUrl;
-  const body = url
+  return url
     ? `<section class="card docframe"><div class="docbar">The 2026 Rankings</div><iframe src="${esc(url)}" title="Hart's Rankings" loading="lazy"></iframe></section>
        <a class="btnlink" href="${esc(url)}" target="_blank" rel="noopener">Open in a new tab</a>`
     : `<section class="card docframe"><div class="docbar">The 2026 Rankings</div>
         <div class="p16" style="padding:20px 16px"><div style="font-size:18px;font-weight:800">Hart's rankings land here before the first tee.</div>
         <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px"><div class="bar" style="width:100%"></div><div class="bar" style="width:94%"></div><div class="bar" style="width:98%"></div><div class="bar" style="width:60%"></div></div></div></section>`;
+}
+function viewRankings() {
   return `<header class="pad top"><div class="eyebrow">The annual write-up</div><h1>Hart's Rankings</h1>
     <div class="sub">Every golfer in the field, ranked and roasted by Hart Zeitler.</div></header>
-    <div class="stack">${body}</div>`;
+    ${rankToggle('hart')}
+    <div class="stack" style="gap:24px">${rankingsBody()}</div>`;
+}
+function rankToggle(active) {
+  const a = (key, href, label) => `<a href="${href}" role="tab" class="${active === key ? 'on' : ''}" aria-selected="${active === key}">${label}</a>`;
+  return `<div class="pad" style="padding-top:16px"><div class="seg" role="tablist" aria-label="Rankings">${a('hart', '#/rankings', "Hart's Rankings")}${a('kate', '#/rankings/kate', "Kate's Dad Rankings")}</div></div>`;
+}
+function katesRow(e, rank) {
+  const pl = e.id ? PLAYERS[e.id] : null;
+  const name = pl ? pl.first : e.name;
+  const t = pl ? (pl.team === 'D' ? 'd' : 'l') : 'n';
+  const tag = pl ? NAMES[pl.team] : (e.tag || '');
+  return `<div class="krow"><div class="rnum ${rank ? t : 'u'}" aria-label="${rank ? 'Rank ' + rank : 'Unranked'}">${rank ? rank : 'UR'}</div>
+    <div class="kname${rank ? '' : ' un'}">${esc(name)}${tag ? `<span class="rteam ${t}">${esc(tag)}</span>` : ''}</div></div>`;
+}
+function viewKates() {
+  return `<header class="pad top"><div class="eyebrow">Dad skills</div><h1>Kate's Dad Rankings</h1>
+    <div class="sub">Everyone ranked by their dad skills. Updated now and then.</div></header>
+    ${rankToggle('kate')}
+    <div class="pad" style="padding-top:16px"><div class="note">These are NOT hotness rankings, but hotness is always a factor. Get over it, snowflakes.</div></div>
+    <div class="stack" style="gap:24px">
+      <section aria-label="Ranked"><div class="card ranklist">${KATES.ranked.map((e, i) => katesRow(e, i + 1)).join('')}</div></section>
+      ${KATES.unranked.length ? `<section aria-label="Unranked"><h2 class="unh">Unranked</h2><div class="card ranklist">${KATES.unranked.map((e) => katesRow(e, 0)).join('')}</div></section>` : ''}
+    </div>`;
 }
 
 // ---------- Kalshi Korner ----------
@@ -640,7 +753,7 @@ function render() {
     case 'score': html = viewScore(); break;
     case 'strokes': html = viewStrokes(); active = 'score'; break;
     case 'record': html = viewRecord(a, parseInt(b, 10)); active = 'score'; break;
-    case 'rankings': html = viewRankings(); break;
+    case 'rankings': html = a === 'kate' ? viewKates() : viewRankings(); break;
     case 'kalshi': html = viewKalshi(); break;
     default: html = viewTee(); active = 'tee';
   }
