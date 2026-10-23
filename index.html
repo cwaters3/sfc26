@@ -142,6 +142,12 @@ h2{margin:0 0 12px;font-size:18px;font-weight:800;letter-spacing:-.01em}
 .rnum.n{background:var(--ink);color:#fff}
 .rnum.u{background:var(--line);color:var(--mut);font-size:13px;letter-spacing:.04em}
 .rteam.n{color:var(--mut)}
+.kctl{margin-left:auto;display:flex;gap:6px;align-items:center}
+.kbtn{min-width:44px;min-height:44px;border-radius:10px;border:1px solid var(--halved);background:#fff;font-size:14px;font-weight:700;color:var(--ink)}
+.kbtn.txt{padding:0 12px;font-size:13px;color:var(--teal)}
+.kbtn:disabled{opacity:.35;cursor:not-allowed}
+.kinput{width:100%;height:48px;border-radius:12px;border:1px solid #C5D1D8;background:#fff;padding:0 14px;font-family:inherit;font-size:16px;color:var(--ink)}
+.kerr{margin-top:10px;color:#8A1F1F;font-size:13px;font-weight:600}
 .unh{margin:0 0 10px;font-size:14px;font-weight:700;letter-spacing:.08em;color:var(--mut);text-transform:uppercase}
 .prop{padding:16px}
 .prop .ttl{font-size:18px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
@@ -229,16 +235,16 @@ const MATCHES = [
     back:  { dolphins: ['bryan', 'mahaesh'],   longteens: ['alastair', 'josh'] } }
 ];
 
-// Kate's Dad Rankings. Reorder the lines to re-rank. Use { name, tag } for anyone outside the 12 golfers.
+// Kate's Dad Rankings: the STARTING list. Once Kate saves from her edit page, her saved order takes over.
+// Names added here later that she hasn't placed yet appear at the end of Unranked.
 const KATES = {
-  ranked: [
-    { id: 'charlie' }, { id: 'paul' }, { id: 'josh' }, { id: 'alastair' },
-    { name: 'Gadaffi', tag: 'Free Agent' }, { id: 'hart' }
-  ],
-  unranked: [
-    { id: 'mahaesh' }, { id: 'henry' }, { id: 'ryan' }, { id: 'john' }, { id: 'ashwin' }, { id: 'bryan' }, { id: 'david' }
-  ]
+  ranked:   ['charlie', 'paul', 'josh', 'alastair', 'gadaffi', 'hart'],
+  unranked: ['mahaesh', 'henry', 'ryan', 'john', 'ashwin', 'bryan', 'david'],
+  guests:   { gadaffi: { name: 'Gadaffi', tag: 'Free Agent' } }
 };
+// Kate's edit page: https://cwaters3.github.io/sfc26/#/kate-edit (not linked anywhere). The password is
+// visible to anyone who views this page's source, which is fine for a joke list among friends.
+const KATE_PASSWORD = 'chazzy69';
 
 // Hart's power rankings. Edit the text here. Wrap a word in *asterisks* to italicize it.
 const RANKINGS = [
@@ -402,13 +408,43 @@ function agoText(ts) {
   if (min === 1) return '1 min ago';
   return min + ' min ago';
 }
+function isKatePassword(input) {
+  return String(input || '').trim().toLowerCase() === KATE_PASSWORD.toLowerCase();
+}
+function katesEntry(key) {
+  const pl = PLAYERS[key];
+  if (pl) return { name: pl.first, t: pl.team === 'D' ? 'd' : 'l', tag: NAMES[pl.team] };
+  const g = KATES.guests[key] || { name: key, tag: '' };
+  return { name: g.name, t: 'n', tag: g.tag || '' };
+}
+function katesLists(cfg) {
+  const known = [...KATES.ranked, ...KATES.unranked];
+  const seen = new Set();
+  const take = (arr) => (Array.isArray(arr) ? arr : []).filter((k) => known.includes(k) && !seen.has(k) && seen.add(k));
+  const ranked = take(cfg && cfg.ranked);
+  const unranked = take(cfg && cfg.unranked);
+  if (!ranked.length && !unranked.length) return { ranked: [...KATES.ranked], unranked: [...KATES.unranked] };
+  known.forEach((k) => { if (!seen.has(k)) { seen.add(k); unranked.push(k); } });
+  return { ranked, unranked };
+}
+function katesMove(lists, key, action) {
+  const ranked = [...lists.ranked];
+  let unranked = [...lists.unranked];
+  const i = ranked.indexOf(key);
+  if (action === 'up' && i > 0) { [ranked[i - 1], ranked[i]] = [ranked[i], ranked[i - 1]]; }
+  else if (action === 'down' && i >= 0 && i < ranked.length - 1) { [ranked[i + 1], ranked[i]] = [ranked[i], ranked[i + 1]]; }
+  else if (action === 'add' && unranked.includes(key)) { unranked = unranked.filter((k) => k !== key); ranked.push(key); }
+  else if (action === 'remove' && i >= 0) { ranked.splice(i, 1); unranked.push(key); }
+  return { ranked, unranked };
+}
 // ==== END PURE ====
 
 // ============================================================================
 // APP
 // ============================================================================
 const state = {
-  results: {}, props: {}, error: false, weather: null, weatherErr: false,
+  results: {}, props: {}, config: {}, error: false,
+  kateUnlocked: (() => { try { return sessionStorage.getItem('kateUnlocked') === '1'; } catch (e) { return false; } })(), kateErr: false, weather: null, weatherErr: false,
   rec: { m: null, hole: 0, sel: null, touched: false }
 };
 let fb = null;
@@ -693,22 +729,50 @@ function rankToggle(active) {
   const a = (key, href, label) => `<a href="${href}" role="tab" class="${active === key ? 'on' : ''}" aria-selected="${active === key}">${label}</a>`;
   return `<div class="pad" style="padding-top:16px"><div class="seg" role="tablist" aria-label="Rankings">${a('hart', '#/rankings', "Hart's Rankings")}${a('kate', '#/rankings/kate', "Kate's Dad Rankings")}</div></div>`;
 }
-function katesRow(e, rank) {
-  const pl = e.id ? PLAYERS[e.id] : null;
-  const name = pl ? pl.first : e.name;
-  const t = pl ? (pl.team === 'D' ? 'd' : 'l') : 'n';
-  const tag = pl ? NAMES[pl.team] : (e.tag || '');
-  return `<div class="krow"><div class="rnum ${rank ? t : 'u'}" aria-label="${rank ? 'Rank ' + rank : 'Unranked'}">${rank ? rank : 'UR'}</div>
-    <div class="kname${rank ? '' : ' un'}">${esc(name)}${tag ? `<span class="rteam ${t}">${esc(tag)}</span>` : ''}</div></div>`;
+function katesRow(key, rank) {
+  const e = katesEntry(key);
+  return `<div class="krow"><div class="rnum ${rank ? e.t : 'u'}" aria-label="${rank ? 'Rank ' + rank : 'Unranked'}">${rank ? rank : 'UR'}</div>
+    <div class="kname${rank ? '' : ' un'}">${esc(e.name)}${e.tag ? `<span class="rteam ${e.t}">${esc(e.tag)}</span>` : ''}</div></div>`;
 }
 function viewKates() {
+  const L = katesLists(state.config.kates);
   return `<header class="pad top"><div class="eyebrow">Dad skills</div><h1>Kate's Dad Rankings</h1>
     <div class="sub">Everyone ranked by their dad skills. Updated now and then.</div></header>
     ${rankToggle('kate')}
     <div class="pad" style="padding-top:16px"><div class="note">These are NOT hotness rankings, but hotness is always a factor. Get over it, snowflakes.</div></div>
     <div class="stack" style="gap:24px">
-      <section aria-label="Ranked"><div class="card ranklist">${KATES.ranked.map((e, i) => katesRow(e, i + 1)).join('')}</div></section>
-      ${KATES.unranked.length ? `<section aria-label="Unranked"><h2 class="unh">Unranked</h2><div class="card ranklist">${KATES.unranked.map((e) => katesRow(e, 0)).join('')}</div></section>` : ''}
+      <section aria-label="Ranked"><div class="card ranklist">${L.ranked.map((k, i) => katesRow(k, i + 1)).join('')}</div></section>
+      ${L.unranked.length ? `<section aria-label="Unranked"><h2 class="unh">Unranked</h2><div class="card ranklist">${L.unranked.map((k) => katesRow(k, 0)).join('')}</div></section>` : ''}
+    </div>`;
+}
+function viewKatesEdit() {
+  const head = (sub) => `<header class="pad top"><div class="eyebrow">Kate only</div><h1>Edit Dad Rankings</h1><div class="sub">${sub}</div></header>`;
+  if (!state.kateUnlocked) {
+    return head('Enter the password to change the rankings.') + `<div class="pad" style="padding-top:16px"><form id="kform" class="card p16" autocomplete="off">
+      <label for="kpw" class="lab" style="display:block;margin-bottom:8px">Password</label>
+      <input id="kpw" class="kinput" type="password" autocapitalize="off" autocorrect="off" spellcheck="false">
+      ${state.kateErr ? `<div class="kerr" role="alert">That's not it. Try again.</div>` : ''}
+      <button type="submit" class="save" style="margin-top:14px">Unlock</button></form></div>`;
+  }
+  const L = katesLists(state.config.kates);
+  const btn = (dir, key, label, text, disabled, cls) => `<button type="button" class="kbtn${cls ? ' ' + cls : ''}" data-act="kmove" data-dir="${dir}" data-key="${key}" aria-label="${esc(label)}"${disabled ? ' disabled' : ''}>${text}</button>`;
+  const ranked = L.ranked.map((k, i) => {
+    const e = katesEntry(k);
+    return `<div class="krow"><div class="rnum ${e.t}">${i + 1}</div><div class="kname">${esc(e.name)}</div>
+      <div class="kctl">${btn('up', k, 'Move ' + e.name + ' up', '▲', i === 0)}${btn('down', k, 'Move ' + e.name + ' down', '▼', i === L.ranked.length - 1)}${btn('remove', k, 'Move ' + e.name + ' to unranked', 'Unrank', false, 'txt')}</div></div>`;
+  }).join('');
+  const unranked = L.unranked.map((k) => {
+    const e = katesEntry(k);
+    return `<div class="krow"><div class="rnum u">UR</div><div class="kname un">${esc(e.name)}</div>
+      <div class="kctl">${btn('add', k, 'Add ' + e.name + ' to the ranking', 'Add to ranking', false, 'txt')}</div></div>`;
+  }).join('');
+  return head('Changes save instantly and show up for everyone.') + `
+    <div class="pad" style="padding-top:12px;display:flex;gap:16px;align-items:center">
+      <a class="lnk" href="#/rankings/kate" style="min-height:44px;display:flex;align-items:center">View the rankings</a>
+      <button type="button" class="kbtn txt" data-act="klock" style="margin-left:auto">Lock</button></div>
+    <div class="stack" style="gap:24px;padding-top:4px">
+      <section aria-label="Ranked"><div class="card ranklist">${ranked || '<div class="p16" style="color:var(--mut)">Nobody is ranked yet.</div>'}</div></section>
+      ${L.unranked.length ? `<section aria-label="Unranked"><h2 class="unh">Unranked</h2><div class="card ranklist">${unranked}</div></section>` : ''}
     </div>`;
 }
 
@@ -754,6 +818,7 @@ function render() {
     case 'strokes': html = viewStrokes(); active = 'score'; break;
     case 'record': html = viewRecord(a, parseInt(b, 10)); active = 'score'; break;
     case 'rankings': html = a === 'kate' ? viewKates() : viewRankings(); break;
+    case 'kate-edit': html = viewKatesEdit(); active = 'rankings'; break;
     case 'kalshi': html = viewKalshi(); break;
     default: html = viewTee(); active = 'tee';
   }
@@ -812,9 +877,32 @@ document.addEventListener('click', (e) => {
     undoLast(el.dataset.m).catch((err) => { console.error(err); toast("Couldn't undo. Try again."); });
     if (last) toast('Undid hole ' + last.hole);
     state.rec.touched = false;
+  } else if (act === 'kmove') {
+    if (!fb) { offlineToast(); return; }
+    const next = katesMove(katesLists(state.config.kates), el.dataset.key, el.dataset.dir);
+    state.config = { ...state.config, kates: { ...next } };
+    render();
+    fb.setDoc(fb.doc(fb.db, 'config', 'kates'), { ranked: next.ranked, unranked: next.unranked, ts: Date.now() })
+      .catch((err) => { console.error(err); toast("Couldn't save that change. Try again."); });
+  } else if (act === 'klock') {
+    state.kateUnlocked = false; state.kateErr = false;
+    try { sessionStorage.removeItem('kateUnlocked'); } catch (e) { /* ignore */ }
+    render();
   } else if (act === 'settle' || act === 'reopen') {
     if (!fb) { offlineToast(); return; }
     setProp(el.dataset.id, act === 'settle' ? el.dataset.val : null).catch((err) => { console.error(err); toast("Couldn't update the prop. Try again."); });
+  }
+});
+
+document.addEventListener('submit', (e) => {
+  if (e.target && e.target.id === 'kform') {
+    e.preventDefault();
+    const input = document.getElementById('kpw');
+    if (isKatePassword(input ? input.value : '')) {
+      state.kateUnlocked = true; state.kateErr = false;
+      try { sessionStorage.setItem('kateUnlocked', '1'); } catch (err) { /* ignore */ }
+    } else { state.kateErr = true; }
+    render();
   }
 });
 
@@ -832,6 +920,7 @@ async function initFirebase() {
     }, (err) => { console.error(err); state.error = true; render(); });
     listen('results', 'results');
     listen('props', 'props');
+    listen('config', 'config');
   } catch (err) {
     console.error(err);
     state.error = true; render();
