@@ -183,7 +183,7 @@ const CONFIG = {
   eventDate: '2026-10-24',
   teeOff: '2026-10-24T10:15:00-04:00',
   coords: { lat: 41.0493, lon: -71.9385 },     // Montauk Downs
-  pairingsFinal: false,                         // set to true after the Friday Evening Selection Process
+  pairingsFinal: true,                          // pairings are final (set to false to show the placeholder notices again)
   rankingsDocUrl: ''                            // paste the "Publish to web" link for Hart's Google Doc
 };
 
@@ -557,7 +557,7 @@ function viewTee() {
   </div>
   <div class="stack">
     ${weatherCard()}${scoreStrip()}${matchesCard()}${howCard()}${rosterCard('D')}${rosterCard('L')}
-    <p class="foot">Handicaps set the strokes in each match. Scoring on this page is hole-by-hole results only.<br>Version 2: new handicaps (max 40)</p>
+    <p class="foot">Handicaps set the strokes in each match. Scoring on this page is hole-by-hole results only.<br>Version 3: final pairings, new handicaps (max 40)</p>
   </div>`;
 }
 
