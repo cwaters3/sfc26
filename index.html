@@ -201,20 +201,20 @@ const FB_STORE_URL = "https://www.gstatic.com/firebasejs/13.0.0/firebase-firesto
 // Stroke index (hole handicap) for holes 1-18, white tees. 1 = hardest.
 const STROKE_INDEX = [11, 17, 9, 5, 3, 13, 7, 15, 1, 2, 18, 14, 8, 16, 6, 10, 12, 4];
 
-// team: 'D' = Dolphins, 'L' = Long-Teens. hcp is used as-is (max = 36).
+// team: 'D' = Dolphins, 'L' = Long-Teens. hcp is used as-is (max = 40).
 const PLAYERS = {
   john:     { name: 'John Malfetano',    first: 'John',    label: 'John M.',    team: 'D', hcp: 11 },
   david:    { name: 'David Malfetano',   first: 'David',   label: 'David M.',   team: 'L', hcp: 15 },
-  charlie:  { name: 'Charlie Waters',    first: 'Charlie', label: 'Charlie W.', team: 'D', hcp: 20 },
-  ryan:     { name: 'Ryan Pennock',      first: 'Ryan',    label: 'Ryan P.',    team: 'D', hcp: 36, max: true },
-  bryan:    { name: 'Bryan Gerla',       first: 'Bryan',   label: 'Bryan G.',   team: 'D', hcp: 20 },
-  mahaesh:  { name: 'Mahaesh Jayaraman', first: 'Mahaesh', label: 'Mahaesh J.', team: 'D', hcp: 36, max: true },
-  hart:     { name: 'Hart Zeitler',      first: 'Hart',    label: 'Hart Z.',    team: 'L', hcp: 21 },
-  alastair: { name: 'Alastair Butler',   first: 'Alastair',label: 'Alastair B.',team: 'L', hcp: 25 },
+  charlie:  { name: 'Charlie Waters',    first: 'Charlie', label: 'Charlie W.', team: 'D', hcp: 19 },
+  ryan:     { name: 'Ryan Pennock',      first: 'Ryan',    label: 'Ryan P.',    team: 'D', hcp: 40, max: true },
+  bryan:    { name: 'Bryan Gerla',       first: 'Bryan',   label: 'Bryan G.',   team: 'D', hcp: 30 },
+  mahaesh:  { name: 'Mahaesh Jayaraman', first: 'Mahaesh', label: 'Mahaesh J.', team: 'D', hcp: 40, max: true },
+  hart:     { name: 'Hart Zeitler',      first: 'Hart',    label: 'Hart Z.',    team: 'L', hcp: 20 },
+  alastair: { name: 'Alastair Butler',   first: 'Alastair',label: 'Alastair B.',team: 'L', hcp: 30 },
   paul:     { name: 'Paul Bentley',      first: 'Paul',    label: 'Paul B.',    team: 'L', hcp: 30 },
-  ashwin:   { name: 'Ashwin Advani',     first: 'Ashwin',  label: 'Ashwin A.',  team: 'L', hcp: 36, max: true },
-  henry:    { name: 'Henry Marsh',       first: 'Henry',   label: 'Henry M.',   team: 'D', hcp: 28 },
-  josh:     { name: 'Josh Horen',        first: 'Josh',    label: 'Josh H.',    team: 'L', hcp: 36, max: true }
+  ashwin:   { name: 'Ashwin Advani',     first: 'Ashwin',  label: 'Ashwin A.',  team: 'L', hcp: 40, max: true },
+  henry:    { name: 'Henry Marsh',       first: 'Henry',   label: 'Henry M.',   team: 'D', hcp: 30 },
+  josh:     { name: 'Josh Horen',        first: 'Josh',    label: 'Josh H.',    team: 'L', hcp: 40, max: true }
 };
 const ROSTER = {
   D: ['john', 'charlie', 'bryan', 'henry', 'ryan', 'mahaesh'],
@@ -244,7 +244,7 @@ const KATES = {
 };
 // Kate's edit page: https://cwaters3.github.io/sfc26/#/kate-edit (not linked anywhere). The password is
 // visible to anyone who views this page's source, which is fine for a joke list among friends.
-const KATE_PASSWORD = 'chazzy69';
+const KATE_PASSWORD = 'chazisthebest';
 
 // Hart's power rankings. Edit the text here. Wrap a word in *asterisks* to italicize it.
 const RANKINGS = [
@@ -557,7 +557,7 @@ function viewTee() {
   </div>
   <div class="stack">
     ${weatherCard()}${scoreStrip()}${matchesCard()}${howCard()}${rosterCard('D')}${rosterCard('L')}
-    <p class="foot">Handicaps set the strokes in each match. Scoring on this page is hole-by-hole results only.</p>
+    <p class="foot">Handicaps set the strokes in each match. Scoring on this page is hole-by-hole results only.<br>Version 2: new handicaps (max 40)</p>
   </div>`;
 }
 
@@ -614,7 +614,7 @@ function strokeGrid(table, start) {
     h += `<div class="g nm ${p.team === 'D' ? 'nd' : 'nl'}">${esc(p.first)}</div>`;
     for (let i = 0; i < 9; i++) {
       const k = p.perHole[start - 1 + i];
-      h += k > 0 ? `<div class="g ${p.team === 'D' ? 'sd' : 'sl'}" aria-label="${k} stroke${k > 1 ? 's' : ''}">${k > 1 ? '●●' : '●'}</div>` : '<div class="g z"></div>';
+      h += k > 0 ? `<div class="g ${p.team === 'D' ? 'sd' : 'sl'}" aria-label="${k} stroke${k > 1 ? 's' : ''}">${'●'.repeat(Math.min(k, 3))}</div>` : '<div class="g z"></div>';
     }
   });
   return `<div class="sg">${h}</div>`;
@@ -626,8 +626,11 @@ function viewStrokes() {
       const table = matchStrokeTable(m, nine);
       const lows = table.filter((p) => p.diff === 0);
       const others = table.filter((p) => p.diff > 0);
-      let note = lows.map((p) => p.first).join(' and ') + ' (' + lows[0].hcp + (lows.length > 1 ? ') are the low men.' : ') is the low man.');
-      if (others.length) note += ' Strokes: ' + others.map((p) => p.first + ' ' + p.diff).join(', ') + '.';
+      const names = (a) => (a.length < 3 ? a.join(' and ') : a.slice(0, -1).join(', ') + ', and ' + a[a.length - 1]);
+      let note = !others.length
+        ? 'Everyone is at ' + lows[0].hcp + ', so nobody gets a stroke.'
+        : names(lows.map((p) => p.first)) + ' (' + lows[0].hcp + (lows.length > 1 ? ') are the low men.' : ') is the low man.') +
+          ' Strokes: ' + others.map((p) => p.first + ' ' + p.diff).join(', ') + '.';
       if (others.some((p) => p.diff > 18)) note += ' Anyone over 18 gets a second stroke on the hardest holes.';
       return `<div class="lab" style="margin:${nine ? 22 : 16}px 0 6px">${nine === 0 ? 'Front 9' : 'Back 9'}</div>
         <div style="font-size:15px;font-weight:800">${esc(pairLabel(teams.dolphins))} vs ${esc(pairLabel(teams.longteens))}</div>
